@@ -52,6 +52,12 @@ function select ($requete) {
 		while($line = $result->fetch(PDO::FETCH_ASSOC)) {
 			$lines[] = $line;
 		}
+		if(empty($lines)) {
+			$err = "La requete '".$requete."' n'a rien renvoye";
+			$this->lastError = $err;
+			$this->errors[] = $this->lastError;
+			return false;
+		}
 		return $lines;
 	}
 	catch (PDOException $e) {

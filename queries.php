@@ -26,7 +26,8 @@ $MODULES = array(
 		),
 	"biens" => array(
 		"afficher",
-		"afficher_prix",)
+		"afficher_prix",
+		"afficher_detail")
 	);
 
 $GLOBALS["MODULES"] = $MODULES;

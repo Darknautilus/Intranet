@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block title %}Affichage d'un bien{% if error == '' %} - Erreur{% endif %}{% endblock %}
+
+{% block content %}
+
+{% if error != '' %}
+
+<h2>Erreur</h2>
+
+<p>Le bien spécifié n'existe pas</p>
+
+<button class="btn" onclick="window.location.href='{{ queries('biens', 'afficher', '') }}'">Retour</button>
+
+{% else %}
+
+<h2>Détail de {{ bien[0].titrebien }}</h2>
+
+<div class="span2"><img src="{{ images() }}/{{ bien[0].photobien }}"/></div>
+
+<div class="span8">
+	<ul class="unstyled">
+		<li><strong>Description :</strong> {{ bien[0].detailbien }}</li>
+		<li><strong>Adresse :</strong> {{ bien[0].adrbien }}</li>
+		<li><strong>Prix en euros :</strong> {{ bien[0].prixbien }}</li>
+		<li><strong>Type :</strong> {{ bien[0].idtype }} ({{ bien[0].nomtype }})</li>
+	</ul>
+	{% set tab = {'checked':checked} %}
+	<button class="btn" onclick="window.location.href='{{ queries('biens', 'afficher_prix', tab) }}'">Retour</button>
+</div>
+
+{% endif %}
+
+{% endblock %}

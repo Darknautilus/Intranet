@@ -45,7 +45,7 @@
 		<th></th>
 	</tr>
 {% for bien in biens %}
-	{% set tab = {'id':bien.idbien} %}
+	{% set tab = {'id':bien.idbien, 'checked':checked} %}
 	<tr onMouseOver="this.style.cursor='pointer'"  onclick="window.location.href='{{ queries('biens','afficher_detail',tab) }}'">
 		<td>{{ bien.titrebien }}</td>
 		<td>{{ bien.detailbien }}</td>

@@ -1,6 +1,10 @@
 <?php
 
-$checked = 1;// Pour le radio sélectionné par défaut
+if(isset($_GET["checked"]))
+	$checked = $_GET["checked"];
+else
+	$checked = 1;// Pour le radio sélectionné par défaut
+
 $result = false;// Pour l'affichage des résultats
 $biens = null;
 $error = "";
