@@ -8,7 +8,8 @@
 
 <p class="lead">Voulez-vous afficher les biens :</p>
 <ul>
-	<li><a href="{{ queries('biens','afficher_prix','') }}">Par prix</a></li>
+	{% set tab = {} %}
+	<li><a href="{{ queries('biens','afficher_prix',tab) }}">Par prix</a></li>
 	<li>Par catégorie</li>
 </ul>
 
