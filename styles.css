@@ -159,3 +159,7 @@ a:link {
 	text-decoration:underline;
 	color:blue;
 }
+
+.listeLiens {
+	list-style-type:none;
+}
