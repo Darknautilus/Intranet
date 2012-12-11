@@ -35,21 +35,24 @@
 
 {% else %}
 
-<table class="table table-striped">
+<table class="table table-striped table-hover">
 	<tr>
 		<th>Titre</th>
 		<th>Détails</th>
-		<th>Prix</th>
+		<th>Prix en €</th>
 		<th>Type</th>
 		<th>Photo</th>
+		<th></th>
 	</tr>
 {% for bien in biens %}
-	<tr>
+	{% set tab = {'id':bien.idbien} %}
+	<tr onMouseOver="this.style.cursor='pointer'"  onclick="window.location.href='{{ queries('biens','afficher_detail',tab) }}'">
 		<td>{{ bien.titrebien }}</td>
 		<td>{{ bien.detailbien }}</td>
 		<td>{{ bien.prixbien }}</td>
 		<td>{{ bien.nomtype }}</td>
 		<td><img src="{{ images() }}/{{ bien.photobien }}" /></td>
+		<td><button class="btn">+</button></td>
 	</tr>
 {% endfor %}
 </table>

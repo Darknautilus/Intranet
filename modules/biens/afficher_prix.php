@@ -7,7 +7,7 @@ $error = "";
 
 if(isset($_SESSION["paramURL"]["formfill"]) && $_SESSION["paramURL"]["formfill"] == 1) {
 	// on traite le formulaire
-	$requete = "SELECT b.titrebien, b.detailbien, b.prixbien, b.photobien, t.nomtype FROM bien b, typebien t WHERE ";
+	$requete = "SELECT b.idbien, b.titrebien, b.detailbien, b.prixbien, b.photobien, t.nomtype FROM bien b, typebien t WHERE ";
 	if($_POST["prix"] == "lt200k") {
 		$requete .= "prixBien < 200000";
 		$checked = 1;
