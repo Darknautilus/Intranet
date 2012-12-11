@@ -1,10 +1,64 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+{% extends 'layout.html' %}
 
-</body>
-</html>
+{% block title %}Liste de biens par prix{% endblock %}
+
+{% block content %}
+
+<h2>Affichage des biens par prix</h2>
+
+{% set tab = {'formfill':1} %}
+<form class="well" method="post" action="{{ queries('biens', 'afficher_prix', tab) }}">
+	<fieldset>
+		<legend>Prix</legend>
+		<label class="radio">
+			<input type="radio" name="prix" id="prix1" value="lt200k" {% if checked == 1 %}checked{% endif %}>
+			< 200 000 €
+		</label>
+		<label>
+			<input type="radio" name="prix" id="prix2" value="b200ka300k" {% if checked == 2 %}checked{% endif %}>
+			de 200 000 à 300 000 €
+		</label>
+		<label>
+			<input type="radio" name="prix" id="prix3" value="gt300k" {% if checked == 3 %}checked{% endif %}>
+			> 300 000 €
+		</label>
+		<button class="btn" type="submit">Chercher</button>
+	</fieldset>
+</form>
+
+{% if result == true %}
+
+
+{% if error != "" %}
+
+<p>{{ error }}</p>
+
+{% else %}
+
+<table class="table table-striped">
+	<tr>
+		<th>Titre</th>
+		<th>Détails</th>
+		<th>Prix</th>
+		<th>Type</th>
+		<th>Photo</th>
+	</tr>
+{% for bien in biens %}
+	<tr>
+		<td>{{ bien.titrebien }}</td>
+		<td>{{ bien.detailbien }}</td>
+		<td>{{ bien.prixbien }}</td>
+		<td>{{ bien.nomtype }}</td>
+		<td><img src="{{ images() }}/{{ bien.photobien }}" /></td>
+	</tr>
+{% endfor %}
+</table>
+
+{% endif %}
+
+
+{% endif %}
+
+
+
+{% endblock %}

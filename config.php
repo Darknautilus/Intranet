@@ -4,10 +4,12 @@
 	Base de donnees
 */
 
-define("DBSERVER", "");
-define("DBNAME", "");
-define("DBUSER", "");
-define("DBPASSWD", "");
+define("DBSERVER", "localhost");
+define("DBNAME", "iut_intranet");
+define("DBUSER", "root");
+define("DBPASSWD", "root");
+
+define("DBHEADER", 'mysql:host='.DBSERVER.';dbname='.DBNAME);
 
 /*
 	Chemins des repertoires

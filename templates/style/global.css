@@ -5,7 +5,12 @@ body
 
 header
 {
-	
+		
+}
+header a, header a:hover
+{
+	color:black;
+	text-decoration: none;
 }
 
 #content

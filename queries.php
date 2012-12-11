@@ -10,7 +10,8 @@ define("DEFAULT_MODULE", "index");
 	array(module => action)
 */
 $DEFAULT_ACTION = array(
-	"index" => "show"
+	"index" => "show",
+	"biens" => "afficher"
 );
 
 $GLOBALS["DEFAULT_ACTION"] = $DEFAULT_ACTION;
@@ -22,7 +23,10 @@ $GLOBALS["DEFAULT_ACTION"] = $DEFAULT_ACTION;
 $MODULES = array(
 	"index" => array(
 		"show"
-		)
+		),
+	"biens" => array(
+		"afficher",
+		"afficher_prix",)
 	);
 
 $GLOBALS["MODULES"] = $MODULES;
@@ -32,6 +36,7 @@ $GLOBALS["MODULES"] = $MODULES;
 	array(module => nom_fichier)
 */
 $MODULES_CONFIG = array(
+	"biens" => "config"
 );
 
 $GLOBALS["MODULES_CONFIG"] = $MODULES_CONFIG;

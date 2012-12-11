@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" href="{{ css() }}/global.css" />
 	<link rel="stylesheet" href="{{ css() }}/bootstrap.min.css" />
+	<link rel="stylesheet" href="{{ css() }}/global.css" />
 	
 	<!-- Ajoute la compatibilité avec les téléphones -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,7 @@
 <script src="{{ templates() }}/js/bootstrap.min.js"></script>
 
 <header>
-	<h1>Agence immobilière</h1>
+	<h1><a href="{{ root() }}">Agence immobilière</a></h1>
 </header>
 
 
@@ -39,10 +39,11 @@
 	<div class="row-fluid">
 		<nav class="span2">
 			<ul class="nav nav-pills nav-stacked">
-				<li><a href="consultprix.php">Consultation des biens par prix</a></li>
+				{% set tab = {} %}
+				<li><a href="{{ queries('biens', 'afficher_prix', tab) }}">Consultation des biens par prix</a></li>
 			</ul>
 		</nav>
-		<div class="span10">
+		<div class="span9 offset1">
 			{% block content %}
 			{% endblock %}
 		</div>
@@ -50,7 +51,9 @@
 </div>
 
 <footer>
-Par Aurélien Bertron, aurelienbertron[at]gmail[dot]com
+<div class="navbar navbar-inner navbar-fixed-bottom">
+<p class="brand">Par Aurélien Bertron, aurelienbertron[at]gmail[dot]com</p>
+</div>
 </footer>
 
 </body>
