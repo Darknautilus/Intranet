@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block title %}Affichage d'un bien{% if error == '' %} - Erreur{% endif %}{% endblock %}
+{% block title %}Affichage d'un bien{% if error != '' %} - Erreur{% endif %}{% endblock %}
 
 {% block content %}
 
@@ -10,24 +10,69 @@
 
 <p>Le bien spécifié n'existe pas</p>
 
+<p class="alert">{{ error }}</p>
+
 {% set tab = {} %}
-<button class="btn" onclick="window.location.href='{{ queries('biens', 'afficher', tab) }}'">Retour</button>
+<button class="btn" onclick="window.location.href='{{ queries('biens', 'afficher', tab) }}'">&lsaquo; Retour</button>
 
 {% else %}
 
-<h2>Détail de {{ bien[0].titrebien }}</h2>
+{% set tab = {'checked':checked} %}
+<div class="row-fluid">
+<button class="btn" onclick="window.location.href='{{ queries('biens', 'afficher_prix', tab) }}'">&lsaquo; Retour</button>
+</div>
 
-<div class="span2"><img src="{{ images() }}/{{ bien[0].photobien }}"/></div>
+<div class="row-fluid">
+<h2>Détails de {{ bien[0].titrebien }}</h2>
+</div>
 
-<div class="span8">
+<div class="row-fluid">
+<div class="span3">
+	<img src="{{ images() }}/{{ bien[0].photobien }}"/>
+</div>
+<div class="span7">
 	<ul class="unstyled">
 		<li><strong>Description :</strong> {{ bien[0].detailbien }}</li>
 		<li><strong>Adresse :</strong> {{ bien[0].adrbien }}</li>
 		<li><strong>Prix en euros :</strong> {{ bien[0].prixbien }}</li>
 		<li><strong>Type :</strong> {{ bien[0].idtype }} ({{ bien[0].nomtype }})</li>
 	</ul>
-	{% set tab = {'checked':checked} %}
-	<button class="btn" onclick="window.location.href='{{ queries('biens', 'afficher_prix', tab) }}'">Retour</button>
+</div>
+</div>
+
+<div class="row-fluid">
+<hr/>
+</div>
+
+<div class="row-fluid">
+<div class="span4">
+
+{% if nbVisite == 0 %}
+	{% set alertType = '' %}
+	{% set texte = "Personne n'a demandé à visiter ce bien, profitez-en !" %}
+{% elseif nbVisite == 1 %}	
+	{% set alertType = 'alert-info' %}
+	{% set texte = "Une personne a demandé à visiter ce bien, faites comme elle !" %}
+{% elseif nbVisite > 1 and nbVisite <= 5 %}
+	{% set alertType = 'alert-info' %}
+	{% set texte = nbVisite ~ " personnes ont demandé à visiter ce bien, faites-en partie !" %}
+{% else %}
+	{% set alertType = 'alert-error' %}
+	{% set texte = "Attention, déjà " ~ nbVisite ~ " personnes veulent visiter ce bien, demandez avant qu'il ne soit trop tard !" %}
+{% endif %}
+
+	<div class="alert alert-block {{ alertType }}">
+		<h4>Visites</h4>
+		<p>{{ texte }}</p>
+	</div>
+</div>
+<div class="span6">
+
+</div>
+</div>
+
+<div class="row-fluid">
+<button class="btn" onclick="window.location.href='{{ queries('biens', 'afficher_prix', tab) }}'">&lsaquo; Retour</button>
 </div>
 
 {% endif %}

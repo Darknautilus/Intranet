@@ -29,7 +29,7 @@ include_once("./queries.php");
 	Initialisation du moteur de templates
 */
 include_once("./loadTwig.php");
-								
+
 /*
 	Désactivation des guillemets magiques
 */
@@ -62,7 +62,7 @@ if(!isset($_GET["action"]) || !is_action($module, $_GET["action"]))
 		$action = default_action($module);
 else
 		$action = $_GET["action"];
-		
+
 if(!isset($_GET["redirect"]) || $_GET["redirect"] != true)
 {
 	$_SESSION["module"] = $module;

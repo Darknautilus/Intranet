@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_GET["checked"]))
+if(isset($_GET["checked"]) && $_GET["checked"] < 4)
 	$checked = $_GET["checked"];
 else
 	$checked = 1;// Pour le radio sélectionné par défaut

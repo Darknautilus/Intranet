@@ -53,7 +53,7 @@ function select ($requete) {
 			$lines[] = $line;
 		}
 		if(empty($lines)) {
-			$err = "La requete '".$requete."' n'a rien renvoye";
+			$err = "Empty SELECT";
 			$this->lastError = $err;
 			$this->errors[] = $this->lastError;
 			return false;
