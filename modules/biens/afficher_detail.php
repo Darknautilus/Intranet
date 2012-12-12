@@ -19,7 +19,7 @@ if(!$nbVisite)
 else
 	$nbVisite = $nbVisite[0]["nbvisite"];
 
-$bienRessemb = $bdd->select("select b.titrebien, b.photobien from ressembler r, bien b where r.idbien1 = '".$_GET["id"]."' and b.idbien = r.idbien2;");
+$bienRessemb = $bdd->select("select b.idbien, b.titrebien, b.photobien from ressembler r, bien b where r.idbien1 = '".$_GET["id"]."' and b.idbien = r.idbien2;");
 
 $bdd->close();
 
