@@ -35,7 +35,7 @@
 
 {% if error != "" %}
 
-<p>{{ error }}</p>
+<p>Aucun bien correspondant n'a été trouvé</p>
 
 {% else %}
 
@@ -46,7 +46,7 @@
 		<th></th>
 	</tr>
 {% for bien in biens %}
-	{% set tab = {'id':bien.idbien, 'checked':checked} %}
+	{% set tab = {'id':bien.idbien} %}
 	<tr onMouseOver="this.style.cursor='pointer'"  onclick="window.location.href='{{ queries('biens','afficher_detail',tab) }}'">
 		<td>{{ bien.titrebien }}</td>
 		<td><img src="{{ images() }}/{{ bien.photobien }}" /></td>

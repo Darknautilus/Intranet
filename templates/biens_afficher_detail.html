@@ -20,7 +20,7 @@
 {% set tab = {'checked':checked} %}
 <div class="row-fluid">
 {% set tab = {} %}
-<button class="btn" onclick="window.location.href='{{ queries('biens', 'afficher_prix', tab) }}'">&lsaquo; Retour</button>
+<button class="btn" onclick="javascript:history.back();">&lsaquo; Retour</button>
 </div>
 
 <div class="row-fluid">
@@ -94,7 +94,7 @@
 </div>
 <div class="row-fluid">
 {% set tab = {} %}
-<button class="btn" onclick="window.location.href='{{ queries('biens', 'afficher_prix', tab) }}'">&lsaquo; Retour</button>
+<button class="btn" onclick="javascript:history.back();">&lsaquo; Retour</button>
 <hr/>
 </div>
 
