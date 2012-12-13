@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block title %}Liste de biens par catégorie{% endblock %}
+
+{% block content %}
+
+<h2>Affichage des biens par catégorie</h2>
+
+{% set tab = {'formfill':1} %}
+<form class="well" method="post" action="{{ queries('biens', 'afficher_cat', tab) }}">
+	<fieldset>
+		<legend>Catégorie</legend>
+		<br/>
+		<p>
+			<select name="cat">
+				<option value="all">Toutes catégories</option>
+				{% for categorie in categories %}
+				<option value="{{ categorie.idtype }}"{% if selected == categorie.idtype %} selected{% endif %}>{{ categorie.nomtype }}</option>
+				{% endfor %}
+			</select>
+		</p>
+		<p>
+			<button class="btn" type="submit">Chercher</button>
+		</p>
+	</fieldset>
+</form>
+
+
+
+
+
+
+{% if result == true %}
+
+
+{% if error != "" %}
+
+<p>{{ error }}</p>
+
+{% else %}
+
+<table class="table table-striped table-hover">
+	<tr>
+		<th>Titre</th>
+		<th>Photo</th>
+		<th></th>
+	</tr>
+{% for bien in biens %}
+	{% set tab = {'id':bien.idbien, 'checked':checked} %}
+	<tr onMouseOver="this.style.cursor='pointer'"  onclick="window.location.href='{{ queries('biens','afficher_detail',tab) }}'">
+		<td>{{ bien.titrebien }}</td>
+		<td><img src="{{ images() }}/{{ bien.photobien }}" /></td>
+		<td><button class="btn">+</button></td>
+	</tr>
+{% endfor %}
+</table>
+
+{% endif %}
+
+
+{% endif %}
+
+{% endblock %}

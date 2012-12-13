@@ -10,7 +10,7 @@
 <ul>
 	{% set tab = {} %}
 	<li><a href="{{ queries('biens','afficher_prix',tab) }}">Par prix</a></li>
-	<li>Par catégorie</li>
+	<li><a href="{{ queries('biens','afficher_cat',tab) }}">Par catégorie</a></li>
 </ul>
 
 {% endblock %}

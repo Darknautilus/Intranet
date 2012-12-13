@@ -27,6 +27,7 @@ $MODULES = array(
 	"biens" => array(
 		"afficher",
 		"afficher_prix",
+		"afficher_cat",
 		"afficher_detail")
 	);
 
