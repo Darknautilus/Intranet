@@ -34,6 +34,11 @@
 		<div class="navbar-inner">
 			<div class="container-fluid">
 				<a class="brand" href="{{ root() }}">Agence Kiloücher</a>
+				<ul class="nav">
+					<li class="divider-vertical"></li>
+					{% set tab = {} %}
+					<li><a href="{{ queries('biens','afficher',tab) }}">Affichage biens</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
