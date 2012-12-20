@@ -36,6 +36,11 @@
 	function images() {
 		return css()."/images";
 	}
+	
+	function bootstrap() {
+		return templates()."/bootstrap";
+	}
+	
 	function queries($module, $action, $param) {
 		$query = root()."/index.php?module=".$module."&action=".$action;
 		foreach($param as $key => $value) {
@@ -58,4 +63,7 @@
 	$twig->addFunction("templates", new Twig_Function_Function("templates"));
 	$twig->addFunction("css", new Twig_Function_Function("css"));
 	$twig->addFunction("images", new Twig_Function_Function("images"));
+	
+	$twig->addFunction("bootstrap", new Twig_Function_Function("bootstrap"));
+	
 	$twig->addFunction("queries", new Twig_Function_Function("queries"));

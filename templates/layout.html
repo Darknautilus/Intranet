@@ -2,17 +2,18 @@
 <html lang="fr">
 <head>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" href="{{ css() }}/bootstrap.min.css" />
-	<link rel="stylesheet" href="{{ css() }}/global.css" />
 	
 	<!-- Ajoute la compatibilité avec les téléphones -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="{{ css() }}/bootstrap-responsive.css" rel="stylesheet">
+	<link href="{{ bootstrap() }}/css/bootstrap-responsive.min.css" rel="stylesheet">
 	
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    
+    <link rel="stylesheet" href="{{ bootstrap() }}/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="{{ css() }}/global.css" />
 	
 	<style type="text/css">
       .main {
@@ -26,15 +27,15 @@
 
 <body>
 
-<script src="{{ templates() }}/js/jquery-1.8.3.min.js"></script>
-<script src="{{ templates() }}/js/bootstrap.min.js"></script>
+<script src="{{ bootstrap() }}/js/jquery-1.8.3.min.js"></script>
+<script src="{{ bootstrap() }}/js/bootstrap.min.js"></script>
 
 <header>
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container-fluid">
-				<a class="brand" href="{{ root() }}">Agence Kiloücher</a>
 				<ul class="nav">
+					<li><a class="brand" href="{{ root() }}">Agence Kiloücher</a></li>
 					<li class="divider-vertical"></li>
 					{% set tab = {} %}
 					<li><a href="{{ queries('biens','afficher',tab) }}">Affichage biens</a></li>
