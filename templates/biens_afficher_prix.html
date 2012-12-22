@@ -1,3 +1,5 @@
+<!-- Héritage du layout qui permet la mise en forme globale des pages (en-tête, menu, pied de page).
+	Dans le layout sont déclarés des blocks qui seront redéfinis par les templates fils comme on peut le voir ici -->
 {% extends 'layout.html' %}
 
 {% block title %}Liste de biens par prix{% endblock %}
@@ -6,7 +8,8 @@
 
 <h2>Affichage des biens par prix</h2>
 
-{% set tab = {'formfill':1} %}
+<!-- Formulaire des boutons radio. L'appel à la fonction queries() permet de construire l'URL. -->
+{% set tab = {} %}
 <form class="well" method="post" action="{{ queries('biens', 'afficher_prix', tab) }}">
 	<fieldset>
 		<legend>Prix</legend>
@@ -23,6 +26,7 @@
 			> 300 000 €
 		</label>
 		<button class="btn" type="submit">Chercher</button>
+		<input type="hidden" name="filled" value="true" />
 	</fieldset>
 </form>
 
@@ -45,7 +49,7 @@
 		<th></th>
 	</tr>
 {% for bien in biens %}
-	{% set tab = {'id':bien.idbien, 'checked':checked} %}
+	{% set tab = {'id':bien.idbien} %}
 	<tr onMouseOver="this.style.cursor='pointer'"  onclick="window.location.href='{{ queries('biens','afficher_detail',tab) }}'">
 		<td>{{ bien.titrebien }}</td>
 		<td>{{ bien.detailbien }}</td>

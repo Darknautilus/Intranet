@@ -1,9 +1,6 @@
 <?php
 
-if(!isset($_GET["selected"]))
-	$selected = "all";
-else
-	$selected = $_GET["selected"];
+$selected = "all";
 
 $result = false;
 $categories = null;

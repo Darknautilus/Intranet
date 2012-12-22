@@ -1,10 +1,5 @@
 <?php
 
-if(isset($_GET["checked"]))
-	$checked = $_GET["checked"];
-else
-	$checked = null;
-
 $error = "";
 
 $bdd = new BDD();
@@ -23,4 +18,4 @@ $bienRessemb = $bdd->select("select b.idbien, b.titrebien, b.photobien from ress
 
 $bdd->close();
 
-echo $twig->render("biens_afficher_detail.html", array("bien" => $bien, "nbVisite" => $nbVisite, "bienRessemb" => $bienRessemb, "error" => $error, "checked" => $checked));
+echo $twig->render("biens_afficher_detail.html", array("bien" => $bien, "nbVisite" => $nbVisite, "bienRessemb" => $bienRessemb, "error" => $error));

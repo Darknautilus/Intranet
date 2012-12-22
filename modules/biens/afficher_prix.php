@@ -1,16 +1,15 @@
 <?php
 
-if(isset($_GET["checked"]) && $_GET["checked"] < 4)
-	$checked = $_GET["checked"];
-else
-	$checked = 1;// Pour le radio sélectionné par défaut
+$checked = 1;// On sélectionne un choix par défaut
 
-$result = false;// Pour l'affichage des résultats
-$biens = null;
+$result = false;// Permet de dire au template si le formulaire a été rempli ou non
+$biens = null;// Liste des biens à afficher
 $error = "";
 
-if(isset($_SESSION["paramURL"]["formfill"]) && $_SESSION["paramURL"]["formfill"] == 1) {
-	// on traite le formulaire
+// Si le formulaire a été rempli
+if(isset($_POST["filled"]) && $_POST["filled"] == "true") {
+	// On traite le formulaire
+	// Préparation de la requête
 	$requete = "SELECT b.idbien, b.titrebien, b.detailbien, b.prixbien, b.photobien, t.nomtype FROM bien b, typebien t WHERE ";
 	if($_POST["prix"] == "lt200k") {
 		$requete .= "prixBien < 200000";
@@ -26,9 +25,11 @@ if(isset($_SESSION["paramURL"]["formfill"]) && $_SESSION["paramURL"]["formfill"]
 	}
 	$requete .= " AND t.idtype = b.idtype;";
 	
+	// Ouverture de la connexion
 	$bdd = new BDD();
+	// Exécution de la reuquête
 	$biens = $bdd->select($requete);
-	
+	// Controle des erreurs
 	if(!$biens)
 		$error .= "Erreur lors de la récupération des biens : ".$bdd->getLastError();
 	
@@ -37,5 +38,5 @@ if(isset($_SESSION["paramURL"]["formfill"]) && $_SESSION["paramURL"]["formfill"]
 	$result = true;
 }
 
-
+// Appel du template
 echo $twig->render("biens_afficher_prix.html", array("checked" => $checked, "result" => $result, "biens" => $biens, "error" => $error));
