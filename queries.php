@@ -28,7 +28,9 @@ $MODULES = array(
 		"afficher",
 		"afficher_prix",
 		"afficher_cat",
-		"afficher_detail")
+		"afficher_detail",
+		"rechercher"
+		)
 	);
 
 $GLOBALS["MODULES"] = $MODULES;

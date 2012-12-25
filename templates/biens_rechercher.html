@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block title %}Rechercher un bien{% endblock %}
+
+{% block content %}
+
+{% set tab = {} %}
+<div class="row-fluid">
+<form class="well form-search" method="post" action="{{ queries('biens', 'rechercher', tab) }}">
+	<fieldset>
+		<legend>Rechercher</legend>
+		<br/>
+		{% if errors is not empty %}
+		<div class="alert alert-box alert-error">
+			<h4>Erreur !</h4>
+			<p>
+				<ul class="unstyled">
+					{% for error in errors %}
+					<li>- {{ error }}</li>
+					{% endfor %}
+				</ul>
+			</p>
+		</div>
+		{% endif %}
+		
+		<div class="input-append">
+			<input class="search-query" type="text" id="search" name="search" placeholder="Entrez 3 mots max." value="{{ value }}"/>
+			<button class="btn" type="submit"><i class="icon-search"></i></button>
+			<input type="hidden" name="filled" id="filled" value="true" />
+		</div>
+	</fieldset>
+</form>
+</div>
+
+
+{% if result == true %}
+<div class="row-fluid">
+{% if error != "" %}
+
+<p>Aucun bien correspondant n'a été trouvé</p>
+
+{% else %}
+
+<table class="table table-striped table-hover">
+	<tr>
+		<th>Détails</th>
+		<th>Photo</th>
+		<th></th>
+	</tr>
+{% for bien in biens %}
+	{% set tab = {'id':bien.idbien} %}
+	<tr onMouseOver="this.style.cursor='pointer'"  onclick="window.location.href='{{ queries('biens','afficher_detail',tab) }}'">
+		<td>{{ bien.detailbien }}</td>
+		<td><img src="{{ images() }}/{{ bien.photoBien }}" /></td>
+		<td><button class="btn">></button></td>
+	</tr>
+{% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+{% endif %}
+
+{% endblock %}
