@@ -55,9 +55,26 @@
 	</div>
 	
 </div>
+<div class="span5 offset1">
 
+{% set tab = {'id':bien[0].idbien} %}
+<form method="post" action="{{ queries('visites', 'saisir', tab) }}">
+	<fieldset>
+		<legend>Visiter ce bien</legend>
+		<br/>
+		<p>
+			<input type="text" name="nom" placeholder="Nom" />
+			<input type="text" name="adresse" placeholder="Adresse" />
+			<input type="text" name="tel" placeholder="Téléphone" />
+			<input type="email" name="email" placeholder="E-mail" />
+			<input type="text" name="dispo" placeholder="Disponibilités" />
+		<p>
+		<button class="btn" type="submit">S'inscrire</button>
+		<input type="hidden" name="filled" value="true" />
+	</fieldset>
+</form>
 
-
+</div>
 </div>
 <div class="row-fluid">
 {% set tab = {} %}
