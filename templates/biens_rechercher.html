@@ -35,7 +35,7 @@
 
 {% if result == true %}
 <div class="row-fluid">
-{% if error != "" %}
+{% if errors is not empty %}
 
 <p>Aucun bien correspondant n'a été trouvé</p>
 
@@ -49,10 +49,10 @@
 	</tr>
 {% for bien in biens %}
 	{% set tab = {'id':bien.idbien} %}
-	<tr onMouseOver="this.style.cursor='pointer'"  onclick="window.location.href='{{ queries('biens','afficher_detail',tab) }}'">
+	<tr onMouseOver="this.style.cursor='pointer'"  onclick="window.location.href='{{ queries('visites','saisir',tab) }}'">
 		<td>{{ bien.detailbien }}</td>
 		<td><img src="{{ images() }}/{{ bien.photoBien }}" /></td>
-		<td><button class="btn">></button></td>
+		<td><button class="btn">Visiter</button></td>
 	</tr>
 {% endfor %}
 </table>

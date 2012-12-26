@@ -11,7 +11,8 @@ define("DEFAULT_MODULE", "index");
 */
 $DEFAULT_ACTION = array(
 	"index" => "show",
-	"biens" => "afficher"
+	"biens" => "afficher",
+	"visites" => "saisir"
 );
 
 $GLOBALS["DEFAULT_ACTION"] = $DEFAULT_ACTION;
@@ -30,6 +31,9 @@ $MODULES = array(
 		"afficher_cat",
 		"afficher_detail",
 		"rechercher"
+		),
+	"visites" => array(
+		"saisir"
 		)
 	);
 
@@ -40,7 +44,8 @@ $GLOBALS["MODULES"] = $MODULES;
 	array(module => nom_fichier)
 */
 $MODULES_CONFIG = array(
-	"biens" => "config"
+	"biens" => "config",
+	"visites" => "config"
 );
 
 $GLOBALS["MODULES_CONFIG"] = $MODULES_CONFIG;
