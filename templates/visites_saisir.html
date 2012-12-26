@@ -62,15 +62,30 @@
 	<fieldset>
 		<legend>Visiter ce bien</legend>
 		<br/>
-		<p>
-			<input type="text" name="nom" placeholder="Nom" />
-			<input type="text" name="adresse" placeholder="Adresse" />
-			<input type="text" name="tel" placeholder="Téléphone" />
-			<input type="email" name="email" placeholder="E-mail" />
-			<input type="text" name="dispo" placeholder="Disponibilités" />
-		<p>
-		<button class="btn" type="submit">S'inscrire</button>
-		<input type="hidden" name="filled" value="true" />
+		<div class="input-append">
+			<input type="text" id="nom" name="nom" />
+			<label for="nom" class="add-on">Nom</label>
+		</div>
+		<div class="input-append">
+			<input type="text" id="adresse" name="adresse" />
+			<label for="adresse" class="add-on">Adresse</label>
+		</div>
+		<div class="input-append">
+			<input type="text" id="tel" name="tel" />
+			<label for="tel" class="add-on">Téléphone</label>
+		</div>
+		<div class="input-append">
+			<input type="email" id="email" name="email" />
+			<label for="email" class="add-on">E-mail</label>
+		</div>
+		<div class="input-append">
+			<input type="text" id="dispo" name="dispo" />
+			<label for="dispo" class="add-on">Disponibilités</label>
+		</div>
+		<div>
+			<button class="btn" type="submit">S'inscrire</button>
+			<input type="hidden" name="filled" value="true" />
+		</div>
 	</fieldset>
 </form>
 
