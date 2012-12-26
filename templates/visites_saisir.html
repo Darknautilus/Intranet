@@ -57,33 +57,49 @@
 </div>
 <div class="span5 offset1">
 
+{% if errors is not empty %}
+		<div class="alert alert-box alert-error">
+			<h4>Erreur !</h4>
+			<p>
+				<ul class="unstyled">
+					{% for error in errors %}
+					<li>- {{ error }}</li>
+					{% endfor %}
+				</ul>
+			</p>
+		</div>
+{% endif %}
+
+
 {% set tab = {'id':bien[0].idbien} %}
 <form method="post" action="{{ queries('visites', 'saisir', tab) }}">
 	<fieldset>
 		<legend>Visiter ce bien</legend>
-		<br/>
+		<p>
+			Entrez vos informations personnelles afin d'enregistrer votre demande.
+		</p>
 		<div class="input-append">
-			<input type="text" id="nom" name="nom" />
+			<input type="text" id="nom" name="nom" value="{{ values.nom }}" />
 			<label for="nom" class="add-on">Nom</label>
 		</div>
 		<div class="input-append">
-			<input type="text" id="adresse" name="adresse" />
+			<input type="text" id="adresse" name="adresse" value="{{ values.adresse }}" />
 			<label for="adresse" class="add-on">Adresse</label>
 		</div>
 		<div class="input-append">
-			<input type="text" id="tel" name="tel" />
+			<input type="text" id="tel" name="tel" value="{{ values.tel }}" />
 			<label for="tel" class="add-on">Téléphone</label>
 		</div>
 		<div class="input-append">
-			<input type="email" id="email" name="email" />
+			<input type="email" id="email" name="email" value="{{ values.email }}" />
 			<label for="email" class="add-on">E-mail</label>
 		</div>
 		<div class="input-append">
-			<input type="text" id="dispo" name="dispo" />
+			<input type="text" id="dispo" name="dispo" value="{{ values.dispo }}" />
 			<label for="dispo" class="add-on">Disponibilités</label>
 		</div>
 		<div>
-			<button class="btn" type="submit">S'inscrire</button>
+			<button class="btn" type="submit">Valider</button>
 			<input type="hidden" name="filled" value="true" />
 		</div>
 	</fieldset>
