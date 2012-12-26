@@ -11,6 +11,7 @@
 	{% set tab = {} %}
 	<li><a href="{{ queries('biens','afficher_prix',tab) }}">Par prix</a></li>
 	<li><a href="{{ queries('biens','afficher_cat',tab) }}">Par catégorie</a></li>
+	<li><a href="{{ queries('biens','rechercher', tab) }}">Par mots-clé</a></li>
 </ul>
 
 {% endblock %}
