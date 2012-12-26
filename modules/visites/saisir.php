@@ -5,6 +5,7 @@ $nbVisite = null;
 $idValide = null;
 $errors = array();
 $values = array();
+$redirect = false;
 
 // Controle du paramètre (id du bien)
 $bdd = new BDD();
@@ -53,12 +54,25 @@ if($bien != false && isset($_GET["id"]) && !empty($_GET["id"])) {
 			$errors[] = "Vous devez entrer des disponibilités valides";
 		else
 			$values["dispo"] = $_POST["dispo"];
+		
+		// Si le formulaire est correct, on insère les infos dans la base
+		if(empty($errors)) {
+			$idClientInser = $bdd->insert("client", array("nomclient" => $_POST["nom"], "adrclient" => $_POST["adresse"], "telclient" => $_POST["tel"], "emailclient" => $_POST["email"]));
+			if(!$idClientInser)
+				$errors[] = "Erreur insertion client : ".$bdd->getLastError();
+			$idDemandeInser = $bdd->insert("demande", array("datedemande" => date("Y-m-j H:i:s"), "disponibilite" => $_POST["dispo"], "idclient" => $idClientInser));
+			if(!$idDemandeInser)
+				$errors[] = "Erreur insertion demande : ".$bdd->getLastError();
+			$resultInsertVisiter = $bdd->insert("visiter", array("idbien"=> $_GET["id"], "iddemande" => $idDemandeInser, "priorite" => 1));
+			
+			if(!$resultInsertVisiter)
+				$errors[] = "Erreur insertion visite : ".$bdd->getLastError();
+			
+			if(empty($errors))
+				$redirect = true;
+		}
+		
 	}
-	
-	
-	
-	
-	
 	
 	$bdd->close();
 }
@@ -66,4 +80,7 @@ else {
 	$idValide = false;
 }
 
-echo $twig->render("visites_saisir.html", array("values" => $values, "idValide" => $idValide, "bien" => $bien, "nbVisite" => $nbVisite, "errors" => $errors));
+if($redirect)
+	echo $twig->render("visites_confirm_saisie.html", array("idclient" => $idClientInser, "dispo" => $_POST["dispo"]));
+else
+	echo $twig->render("visites_saisir.html", array("values" => $values, "idValide" => $idValide, "bien" => $bien, "nbVisite" => $nbVisite, "errors" => $errors));

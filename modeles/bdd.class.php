@@ -156,7 +156,7 @@ function delete ($table, $conditions) {
  * 		$table : la table où insérer l'enregistrement
  * 		$valeurs : tableau associatif de la forme champ => valeur
  * 
- * Retourne true si la suppression s'est faite correctement, et false sinon
+ * Retourne l'id de l'élément inséré si l'insertion s'est faite correctement. Si l'insertion s'est faite correctement mais qu'on ne peut récupérer d'id, retourne 1. Sinon, retourne false.
  */
 function insert ($table, $valeurs) {
 	$colonnes_ = array_keys($valeurs) ;
@@ -173,12 +173,19 @@ function insert ($table, $valeurs) {
 	$sql .= ') VALUES (' ;
 	$sql .= join(', ', $valeurs_) ;
 	$sql .= ');' ;
-	
-	var_dump($sql);
  
 	try {
-		$resultat = $this->bdd->exec($sql);
-		return $resultat;
+		$lines = $this->bdd->exec($sql);
+		if($lines > 0) {
+			$lastId = $this->bdd->lastInsertId();
+			if(!$lastId)
+				return $lines;
+			else
+				return $lastId;
+		}
+		else {
+			return false;
+		}
 	}
 	catch (PDOException $e) {
 		$this->lastError = $e->getMessage();
