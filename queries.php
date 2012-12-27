@@ -12,7 +12,8 @@ define("DEFAULT_MODULE", "index");
 $DEFAULT_ACTION = array(
 	"index" => "show",
 	"biens" => "afficher",
-	"visites" => "saisir"
+	"visites" => "saisir",
+	"base" => "afficher"
 );
 
 $GLOBALS["DEFAULT_ACTION"] = $DEFAULT_ACTION;
@@ -34,6 +35,9 @@ $MODULES = array(
 		),
 	"visites" => array(
 		"saisir"
+		),
+	"base" => array(
+		"afficher"
 		)
 	);
 
@@ -45,7 +49,8 @@ $GLOBALS["MODULES"] = $MODULES;
 */
 $MODULES_CONFIG = array(
 	"biens" => "config",
-	"visites" => "config"
+	"visites" => "config",
+	"base" => "config"
 );
 
 $GLOBALS["MODULES_CONFIG"] = $MODULES_CONFIG;
