@@ -34,7 +34,8 @@ $MODULES = array(
 		"rechercher"
 		),
 	"visites" => array(
-		"saisir"
+		"saisir",
+		"controle_saisie"
 		),
 	"base" => array(
 		"afficher"

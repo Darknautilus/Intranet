@@ -1,6 +1,6 @@
 <?php
 
-$bien = null;
+$bien = false;
 $nbVisite = null;
 $idValide = null;
 $errors = array();
@@ -8,11 +8,13 @@ $values = array();
 $redirect = false;
 
 // Controle du paramètre (id du bien)
-$bdd = new BDD();
-$bien = $bdd->select("select idbien from bien where idbien = '".$_GET["id"]."';");
-$bdd->close();
+if(isset($_GET["id"]) && !empty($_GET["id"])) {
+	$bdd = new BDD();
+	$bien = $bdd->select("select idbien from bien where idbien = '".$_GET["id"]."';");
+	$bdd->close();
+}
 
-if($bien != false && isset($_GET["id"]) && !empty($_GET["id"])) {
+if($bien != false) {
 	
 	$idValide = true;
 	
