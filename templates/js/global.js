@@ -28,6 +28,8 @@ function getXMLHttpRequest() {
 
 
 /* **************************************************************************************** */
+/* Accordéon pour l'affichage du contenu des tables											*/
+/* **************************************************************************************** */
 
 function baseRequest(callback, tableName, targetFile) {
 	var xhr = getXMLHttpRequest();
@@ -49,4 +51,62 @@ function baseRequest(callback, tableName, targetFile) {
 
 function setAccordionBody(content, tableName) {
 	$("#"+tableName+" div").html(content);
+}
+
+
+/* **************************************************************************************** */
+/* Formulaire de saisie de visite															*/
+/* **************************************************************************************** */
+
+// Initialisation du formulaire
+$(document).ready(function() {
+	$(".form-control").each(function() {
+		$(this).find(".form-control-group").each(function() {
+			if($(this).hasClass("required")) {
+				$(this).attr("valid","false");
+			}
+			else {
+				$(this).attr("valid","true");
+			}
+		})
+		updateFormMarkup($(this));
+	})
+});
+
+function updateFormMarkup(form) {
+	var allValid = true;
+	form.find(".form-control-group").each(function() {
+		if($(this).attr("valid") == "false") {
+			$(this).find(".form-markup").find(":first").css("display","inline-block");
+			allValid = false;
+		}
+		else {
+			$(this).find(".form-markup").find(":first").css("display","none");
+		}
+	});
+	if(!allValid) {
+		form.find(".form-submit").attr("disabled","true");
+	}
+}
+
+
+function formRequest(callback, fieldName, targetFile) {
+	var xhr = getXMLHttpRequest();
+	
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+			callback(xhr.responseText, fieldName);
+		}
+		else {
+			
+		}
+	};
+	
+	xhr.open("POST", targetFile, true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.send("ajax=true&field="+fieldName);
+}
+
+function setValidMarkup() {
+	
 }

@@ -2,13 +2,14 @@
 
 include(PATH_MODELES."/bdd.class.php");
 
-$tables = array(
-	"client",
-	"typebien",
-	"demande",
-	"bien",
-	"ressembler",
-	"visiter"
-);
+$bdd = new BDD();
+$tables = $bdd->select("SHOW TABLES;");
+if($tables != false) {
+	$tablesNames = array();
+	foreach($tables as $elem) {
+		$tablesNames[] = $elem["Tables_in_".DBNAME];
+	}
+}
+$bdd->close();
 
-$GLOBALS["BASE_TABLES_NAMES"] = $tables;
+$GLOBALS["BASE_TABLES_NAMES"] = $tablesNames;
