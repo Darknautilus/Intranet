@@ -50,7 +50,7 @@
 {% for bien in biens %}
 	{% set tab = {'id':bien.idbien} %}
 	<tr onMouseOver="this.style.cursor='pointer'"  onclick="window.location.href='{{ queries('visites','saisir',tab) }}'">
-		<td>{{ bien.detailbien }}</td>
+		<td>{% autoescape false %}{{ bien.detailbien }}{% endautoescape %}</td>
 		<td><img src="{{ images() }}/{{ bien.photoBien }}" /></td>
 		<td><button class="btn">Visiter</button></td>
 	</tr>

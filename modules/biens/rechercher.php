@@ -17,6 +17,14 @@ if(isset($_POST["filled"]) && $_POST["filled"] == true) {
 
 	if(empty($errors)) {
 		$bdd = new BDD();
+		
+		// Préparation à la mise en gras des mots recherchés
+		$patterns = array();
+		$replacements = array();
+		foreach($mots as $mot) {
+			$patterns[] = "/".$mot."/";
+			$replacements[] = "<strong>".$mot."</strong>";
+		}
 
 		$requeteAND = "SELECT b.idbien, b.detailbien, b.photoBien FROM bien b WHERE b.detailbien LIKE '%".$mots[0]."%'";
 		$requeteOR = "SELECT b.idbien, b.detailbien, b.photoBien FROM bien b WHERE b.detailbien LIKE '%".$mots[0]."%'";
@@ -58,6 +66,11 @@ if(isset($_POST["filled"]) && $_POST["filled"] == true) {
 		}
 	
 		$bdd->close();
+		
+		
+		for ($i = 0; $i < count($biens); $i++) {
+			$biens[$i]["detailbien"] = preg_replace($patterns, $replacements, $biens[$i]["detailbien"]);
+		}
 		
 		$result = true;
 	}
