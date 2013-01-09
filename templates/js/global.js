@@ -92,7 +92,7 @@ $(document).ready(function() {
 	$(".form-control").each(function() {
 		formAction = $(this).attr("form-control-action");
 		$(this).find(".form-control-group").each(function() {
-			if($(this).hasClass("required")) {
+			if($(this).find(".form-element").attr("required")) {
 				required = true;
 			}
 			else {

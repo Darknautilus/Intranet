@@ -78,29 +78,29 @@
 		<p>
 			Entrez vos informations personnelles afin d'enregistrer votre demande.
 		</p>
-		<div class="input-append input-prepend form-control-group required">
+		<div class="input-append input-prepend form-control-group">
 			<span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-			<input class="span9 form-element" type="text" id="nom" name="nom" value="{{ values.nom }}" />
+			<input class="span9 form-element" type="text" id="nom" name="nom" value="{{ values.nom }}" required />
 			<label for="nom" class="add-on form-label">Nom</label>
 		</div>
-		<div class="input-append input-prepend form-control-group required">
+		<div class="input-append input-prepend form-control-group">
 			<span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-			<input class="span9 form-element" type="text" id="adresse" name="adresse" value="{{ values.adresse }}" />
+			<input class="span9 form-element" type="text" id="adresse" name="adresse" value="{{ values.adresse }}" required/>
 			<label for="adresse" class="add-on">Adresse</label>
 		</div>
-		<div class="input-append input-prepend form-control-group required">
+		<div class="input-append input-prepend form-control-group">
 			<span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-			<input class="span9 form-element" type="text" id="tel" name="tel" value="{{ values.tel }}" placeholder="Format : 0XXXXXXXXX" />
+			<input class="span9 form-element" type="text" id="tel" name="tel" value="{{ values.tel }}" placeholder="Format : 0XXXXXXXXX" required/>
 			<label for="tel" class="add-on">Téléphone</label>
 		</div>
-		<div class="input-append input-prepend form-control-group required">
+		<div class="input-append input-prepend form-control-group">
 			<span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-			<input class="span9 form-element" type="email" id="email" name="email" value="{{ values.email }}" />
+			<input class="span9 form-element" type="email" id="email" name="email" value="{{ values.email }}" required/>
 			<label for="email" class="add-on">E-mail</label>
 		</div>
-		<div class="input-append input-prepend form-control-group required">
+		<div class="input-append input-prepend form-control-group">
 			<span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-			<input class="span9 form-element" type="text" id="dispo" name="dispo" value="{{ values.dispo }}" />
+			<input class="span9 form-element" type="text" id="dispo" name="dispo" value="{{ values.dispo }}" required/>
 			<label for="dispo" class="add-on">Disponibilités</label>
 		</div>
 		<div>
