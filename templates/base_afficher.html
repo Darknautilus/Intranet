@@ -16,7 +16,7 @@
   		<div class="accordion-group">
     		<div class="accordion-heading">
     			{% set tab = {} %}
-      			<a class="accordion-toggle btn" data-toggle="collapse" data-parent="#accordion2" data-target="#{{ table }}" onclick="baseRequest(setAccordionBody,'{{ table }}', '{{ queries('base', 'afficher', tab) }}');">
+      			<a class="accordion-toggle btn" data-toggle="collapse" data-target="#{{ table }}" onclick="baseRequest(setAccordionBody,'{{ table }}', '{{ queries('base', 'afficher', tab) }}');">
         		Table "{{ table }}" <span id="loader" style="display:none;"><img src="{{ images() }}/loader.gif" alt="loader" /></span>
       			</a>
     		</div>
