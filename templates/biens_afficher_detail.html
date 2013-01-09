@@ -82,7 +82,7 @@
 	<tr onMouseOver="this.style.cursor='pointer'"  onclick="window.location.href='{{ queries('biens','afficher_detail',tab) }}'">
 		<td>{{ bien.titrebien }}</td>
 		<td><img src="{{ images() }}/{{ bien.photobien }}" /></td>
-		<td><button class="btn">></button></td>
+		<td><a class="btn" href="{{ queries('biens','afficher_detail',tab) }}">></a></td>
 	</tr>
 	{% endfor %}
 	</table>

@@ -57,7 +57,7 @@
 		<td>{{ bien.prixbien }}</td>
 		<td>{{ bien.nomtype }}</td>
 		<td><img src="{{ images() }}/{{ bien.photobien }}" /></td>
-		<td><button class="btn">></button></td>
+		<td><a class="btn" href="{{ queries('biens','afficher_detail',tab) }}">></a></td>
 	</tr>
 {% endfor %}
 </table>

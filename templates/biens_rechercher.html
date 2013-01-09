@@ -52,7 +52,7 @@
 	<tr onMouseOver="this.style.cursor='pointer'"  onclick="window.location.href='{{ queries('visites','saisir',tab) }}'">
 		<td>{% autoescape false %}{{ bien.detailbien }}{% endautoescape %}</td>
 		<td><img src="{{ images() }}/{{ bien.photoBien }}" /></td>
-		<td><button class="btn">Visiter</button></td>
+		<td><a class="btn" href="{{ queries('visites','saisir',tab) }}">Visiter</a></td>
 	</tr>
 {% endfor %}
 </table>
