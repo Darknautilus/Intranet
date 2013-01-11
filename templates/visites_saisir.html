@@ -43,7 +43,7 @@
 	{% set texte = "Une personne a demandé à visiter ce bien, faites comme elle !" %}
 {% elseif nbVisite > 1 and nbVisite <= 5 %}
 	{% set alertType = 'alert-info' %}
-	{% set texte = nbVisite ~ " personnes ont demandé à visiter ce bien, faites-en partie !" %}
+	{% set texte = nbVisite ~ " personnes ont demandé à visiter ce bien, rejoignez-les !" %}
 {% else %}
 	{% set alertType = 'alert-error' %}
 	{% set texte = "Attention, déjà " ~ nbVisite ~ " personnes veulent visiter ce bien, demandez avant qu'il ne soit trop tard !" %}

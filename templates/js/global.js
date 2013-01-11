@@ -37,10 +37,10 @@ function baseRequest(callback, tableName, targetFile) {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
 			callback(xhr.responseText, tableName);
-			$("#loader").style.display = "none";
+			$(".loader_image").style.display = "none";
 		}
 		else {
-			$("#loader").style.display = "inline";
+			$(".loader_image").style.display = "inline";
 		}
 	};
 	

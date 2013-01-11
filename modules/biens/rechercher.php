@@ -14,6 +14,15 @@ if(isset($_POST["filled"]) && $_POST["filled"] == true) {
 		$errors[] = "Vous devez au moins entrer un mot !";
 	else if($nbMots > 3)
 		$errors[] = "Vous devez entrer trois mots au maximum !";
+	
+	if(empty($errors)) {
+		foreach($mots as $mot) {
+			if(empty($mot)) {
+				$errors[] = "N'essaye pas de me berner, petit malin !";
+				break;
+			}
+		}
+	}
 
 	if(empty($errors)) {
 		$bdd = new BDD();

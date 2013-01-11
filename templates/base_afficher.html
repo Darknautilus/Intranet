@@ -17,7 +17,7 @@
     		<div class="accordion-heading">
     			{% set tab = {} %}
       			<a class="accordion-toggle btn" data-toggle="collapse" data-target="#{{ table }}" onclick="baseRequest(setAccordionBody,'{{ table }}', '{{ queries('base', 'afficher', tab) }}');">
-        		Table "{{ table }}" <span id="loader" style="display:none;"><img src="{{ images() }}/loader.gif" alt="loader" /></span>
+        		Table "{{ table }}" <span class="loader_image" style="display:none;"><img src="{{ images() }}/loader.gif" alt="loader" /></span>
       			</a>
     		</div>
     		<div id="{{ table }}" class="accordion-body collapse">

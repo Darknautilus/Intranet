@@ -27,25 +27,30 @@
 
 <body>
 
-<script src="{{ templates() }}/js/jquery-1.8.3.js"></script>
-<script src="{{ bootstrap() }}/js/bootstrap.min.js"></script>
-<script src="{{ templates() }}/js/global.js"></script>
-
 <header>
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container-fluid">
-				<ul class="nav">
-					<li><a class="brand" href="{{ root() }}">Agence Kiloücher</a></li>
-					<li class="divider-vertical"></li>
-					{% set tab = {} %}
-					<li><a href="{{ queries('biens','afficher',tab) }}">Affichage biens</a></li>
-					<li><a href="{{ queries('base','afficher',tab) }}">Affichage base</a></li>
-				</ul>
-				<form class="navbar-search pull-right" method="post" action="{{ queries('biens','rechercher',tab) }}">
-					<input class="search-query" type="text" id="search" name="search" placeholder="Rechercher 3 mots maximum" />
-					<input type="hidden" name="filled" id="filled" value="true" />
-				</form>
+				
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				
+				<a class="brand" href="{{ root() }}">Agence Kiloücher</a>
+				
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						{% set tab = {} %}
+						<li><a href="{{ queries('biens','afficher',tab) }}">Affichage biens</a></li>
+						<li><a href="{{ queries('base','afficher',tab) }}">Affichage base</a></li>
+					</ul>
+					<form class="navbar-search pull-right" method="post" action="{{ queries('biens','rechercher',tab) }}">
+						<input class="search-query" type="text" id="search" name="search" placeholder="Rechercher 3 mots maximum" />
+						<input type="hidden" name="filled" id="filled" value="true" />
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -76,6 +81,10 @@
 <em class="brand">Par Aurélien Bertron, aurelienbertron[at]gmail[dot]com</em>
 </div>
 </footer>
+
+<script src="{{ templates() }}/js/jquery-1.8.3.js"></script>
+<script src="{{ bootstrap() }}/js/bootstrap.min.js"></script>
+<script src="{{ templates() }}/js/global.js"></script>
 
 </body>
 </html>
