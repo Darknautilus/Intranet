@@ -42,12 +42,12 @@ if($bien != false) {
 		else
 			$values["adresse"] = $_POST["adresse"];
 	
-		if(!isset($_POST["tel"]) || empty($_POST["tel"]))
+		if(!isset($_POST["tel"]) || strlen($_POST["tel"]) != 10)
 			$errors[] = "Vous devez entrer un numéro de téléphone correct";
 		else
 			$values["tel"] = $_POST["tel"];
 	
-		if(!isset($_POST["email"]) || empty($_POST["email"]))
+		if(!isset($_POST["email"]) || empty($_POST["email"]) || !isValidMail($_POST["email"]))
 			$errors[] = "Vous devez entrer une adresse e-mail valide";
 		else
 			$values["email"] = $_POST["email"];
