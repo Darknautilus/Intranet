@@ -37,10 +37,10 @@ function baseRequest(callback, tableName, targetFile) {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
 			callback(xhr.responseText, tableName);
-			$(".loader_image").style.display = "none";
+			$(".loader_image").css("display","none");
 		}
 		else {
-			$(".loader_image").style.display = "inline";
+			$(".loader_image").css("display","inline");
 		}
 	};
 	
@@ -48,6 +48,7 @@ function baseRequest(callback, tableName, targetFile) {
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send("ajax=true&table="+tableName);
 }
+
 
 function setAccordionBody(content, tableName) {
 	$("#"+tableName+" div").html(content);
