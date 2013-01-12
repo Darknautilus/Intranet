@@ -67,7 +67,16 @@
 				<li><a href="{{ queries('biens','afficher_cat',tab) }}">Consultation des biens par catégorie</a></li>
 				<li><a href="{{ queries('biens','rechercher',tab) }}">Recherche d'un bien à visiter (client nouveau)</a></li>
 				<li><a href="{{ queries('base','afficher',tab) }}">Affichage base</a></li>
+				<li class="visible-phone"><a href="#" class="html-popover-trigger" html-popover-content="#confirmRAZ" data-placement="top" title="Attention !">RAZ Base !</a></li>
 			</ul>
+			<button class="btn btn-danger btn-block html-popover-trigger hidden-phone" html-popover-content="#confirmRAZ" data-placement="top" title="Attention !">RAZ Base !</button>
+			<div id="confirmRAZ" class="html-popover-content" style="display:none;">
+				<p>Etes-vous sûr(e) de vouloir écraser le contenu de la base ?</p>
+				<div class="btn-group">
+					<button class="btn btn-primary html-popover-close">Non</button>
+					<a href="{{ queries('base','raz',{}) }}" class="btn">Oui</a>
+				</div>
+			</div>
 		</nav>
 		<div class="span10">
 		{% block content %}
@@ -85,6 +94,7 @@
 <script src="{{ templates() }}/js/jquery-1.8.3.js"></script>
 <script src="{{ bootstrap() }}/js/bootstrap.min.js"></script>
 <script src="{{ templates() }}/js/global.js"></script>
+<script src="{{ templates() }}/js/bootstrap-overlay.js"></script>
 
 </body>
 </html>

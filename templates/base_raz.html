@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}Base écrasée{% endblock %}
+
+{% block content %}
+
+<div class="alert alert-success">
+	<h4>Base écrasée</h4>
+	<p>
+		La base a été remise à zéro
+	</p>
+	<a href="{{ queries('','',{}) }}" class="btn btn-block">Retour à l'accueil</a>
+</div>
+
+{% endblock %}

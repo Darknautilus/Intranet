@@ -26,6 +26,10 @@ function __construct() {
 	}
 }
 
+function getBDD() {
+	return $this->bdd;
+}
+
 function getLastError() {
 	return $this->lastError;
 }

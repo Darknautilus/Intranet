@@ -38,7 +38,8 @@ $MODULES = array(
 		"controle_saisie"
 		),
 	"base" => array(
-		"afficher"
+		"afficher",
+		"raz"
 		)
 	);
 
