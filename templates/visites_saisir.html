@@ -107,7 +107,7 @@
 			<p>Veuillez répondre à la question suivante :<br/>
 			<em>{{ getAntiSpam().getMessage() }}</em>
 			</p>
-			<input class="span9" type="text" id="antiSpam" name="antiSpam" required/>
+			<input class="span9" type="text" id="antiSpam" name="antiSpam" value="{{ getAntiSpam().getResult() }}" required/>
 		</div>
 		<div>
 			<input class="btn btn-block btn-primary form-submit" type="submit" value="Valider" />

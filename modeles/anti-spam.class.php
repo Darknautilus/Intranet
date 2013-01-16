@@ -16,6 +16,10 @@ class AntiSpam {
 		return "Combien font $this->nb1 + $this->nb2 ?";
 	}
 	
+	function getResult() {
+		return $this->result;
+	}
+	
 	function isCorrect($_result) {
 		return $_result == $this->result;
 	}

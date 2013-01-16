@@ -4,7 +4,7 @@ $bien = false;
 $nbVisite = null;
 $idValide = null;
 $errors = array();
-$values = array();
+$values = array("nom"=>"Cyrano de Bergerac","adresse"=>"rue du Panache","tel"=>"0745231254","email"=>"cyrano@laposte.net","dispo"=>"N'importe quand, l'épée au poing");
 $redirect = false;
 
 // Controle du paramètre (id du bien)
