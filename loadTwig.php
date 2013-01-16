@@ -49,6 +49,10 @@
 		return $query;
 	}
 	
+	function getAntiSpam() {
+		return $_SESSION["antiSpam"];
+	}
+	
 	Twig_Autoloader::register();
 
 	$loader = new Twig_Loader_Filesystem(dirname(__FILE__).'/templates');
@@ -67,3 +71,5 @@
 	$twig->addFunction("bootstrap", new Twig_Function_Function("bootstrap"));
 	
 	$twig->addFunction("queries", new Twig_Function_Function("queries"));
+	
+	$twig->addFunction("getAntiSpam", new Twig_Function_Function("getAntiSpam"));

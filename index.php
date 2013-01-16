@@ -1,10 +1,5 @@
 <?php
 
-/*
-	Initialisation des sessions
-*/
-
-session_start();
 
 /*
 	Gestion des redirections URL
@@ -46,6 +41,12 @@ if(get_magic_quotes_gpc())
 $_POST = array_map("htmlspecialchars", $_POST);
 $_GET = array_map("htmlspecialchars", $_GET);
 $_COOKIE = array_map("htmlspecialchars", $_COOKIE);
+
+/*
+ Initialisation des sessions
+*/
+
+session_start();
 
 /*
 	Démarrage de la temporisation de sortie
