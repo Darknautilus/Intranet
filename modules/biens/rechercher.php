@@ -3,7 +3,7 @@
 $result = false;
 $biens = null;
 $errors = array();
-$value = "";
+$value = "villa neuve";
 
 if(isset($_POST["filled"]) && $_POST["filled"] == true) {
 	// Formulaire rempli
