@@ -1,6 +1,8 @@
 <?php
 	include_once(dirname(__FILE__).'/twig/lib/Twig/Autoloader.php');
 	
+	include_once(dirname(__FILE__)."/globalFunctions.php");
+	
 	// Coupe un texte à $longueur caractères, sur les espaces, et ajoute des points de suspension...
 	function tronque($chaine, $longueur = 120)
 	{
@@ -53,6 +55,7 @@
 		return $_SESSION["antiSpam"];
 	}
 	
+	
 	Twig_Autoloader::register();
 
 	$loader = new Twig_Loader_Filesystem(dirname(__FILE__).'/templates');
@@ -73,3 +76,5 @@
 	$twig->addFunction("queries", new Twig_Function_Function("queries"));
 	
 	$twig->addFunction("getAntiSpam", new Twig_Function_Function("getAntiSpam"));
+	$twig->addFunction("visitesCaddie", new Twig_Function_Function("visitesCaddie"));
+	$twig->addFunction("visiteExiste", new Twig_Function_Function("visiteExiste"));

@@ -24,8 +24,35 @@ function getXMLHttpRequest() {
 	return xhr;
 }
 
+/* **************************************************************************************** */
+/* Envoi de formulaire de visite															*/
+/* **************************************************************************************** */
 
-
+$(document).ready(function() {
+	
+	$(".formAjouteVisiteCaddie").submit(function(e) {
+		var form = $(this);
+		var idbien = $("#idbien").val();
+		var priorite = $("#priorite").val();
+		
+		$.ajax({
+			type: form.attr("method"),
+            url: form.attr("action"),
+            data: form.serialize(),
+            dataType: "json",
+            success: function(data){
+                if(data.result) {
+                    form.parent().html("<p class=\"alert alert-success alert-block\">Visite ajoutée avec la priorite "+data.priorite+"</p>");
+                }
+                else {
+                	form.parent().html("<p class=\"alert alert-block\">Visite déjà ajoutée avec la priorite "+data.priorite+"</p>");
+                }
+            }
+		});
+		return false;
+	});
+	
+});
 
 /* **************************************************************************************** */
 /* Accordéon pour l'affichage du contenu des tables											*/

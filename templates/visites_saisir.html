@@ -16,15 +16,15 @@
 
 <div class="row-fluid">
 <div class="span3">
-	<img src="{{ images() }}/{{ bien[0].photobien }}"/>
+  <img src="{{ images() }}/{{ bien[0].photobien }}"/>
 </div>
 <div class="span7">
-	<ul class="unstyled">
-		<li><strong>Description :</strong> {{ bien[0].detailbien }}</li>
-		<li><strong>Adresse :</strong> {{ bien[0].adrbien }}</li>
-		<li><strong>Prix en euros :</strong> {{ bien[0].prixbien }}</li>
-		<li><strong>Type :</strong> {{ bien[0].idtype }} ({{ bien[0].nomtype }})</li>
-	</ul>
+  <ul class="unstyled">
+    <li><strong>Description :</strong> {{ bien[0].detailbien }}</li>
+    <li><strong>Adresse :</strong> {{ bien[0].adrbien }}</li>
+    <li><strong>Prix en euros :</strong> {{ bien[0].prixbien }}</li>
+    <li><strong>Type :</strong> {{ bien[0].idtype }} ({{ bien[0].nomtype }})</li>
+  </ul>
 </div>
 </div>
 
@@ -36,84 +36,84 @@
 <div class="span5">
 
 {% if nbVisite == 0 %}
-	{% set alertType = '' %}
-	{% set texte = "Personne n'a demandé à visiter ce bien, profitez-en !" %}
+  {% set alertType = '' %}
+  {% set texte = "Personne n'a demandé à visiter ce bien, profitez-en !" %}
 {% elseif nbVisite == 1 %}	
-	{% set alertType = 'alert-info' %}
-	{% set texte = "Une personne a demandé à visiter ce bien, faites comme elle !" %}
+  {% set alertType = 'alert-info' %}
+  {% set texte = "Une personne a demandé à visiter ce bien, faites comme elle !" %}
 {% elseif nbVisite > 1 and nbVisite <= 5 %}
-	{% set alertType = 'alert-info' %}
-	{% set texte = nbVisite ~ " personnes ont demandé à visiter ce bien, rejoignez-les !" %}
+  {% set alertType = 'alert-info' %}
+  {% set texte = nbVisite ~ " personnes ont demandé à visiter ce bien, rejoignez-les !" %}
 {% else %}
-	{% set alertType = 'alert-error' %}
-	{% set texte = "Attention, déjà " ~ nbVisite ~ " personnes veulent visiter ce bien, demandez avant qu'il ne soit trop tard !" %}
+  {% set alertType = 'alert-error' %}
+  {% set texte = "Attention, déjà " ~ nbVisite ~ " personnes veulent visiter ce bien, demandez avant qu'il ne soit trop tard !" %}
 {% endif %}
 
-	<div class="alert alert-block {{ alertType }}">
-		<h4>Visites</h4>
-		<p>{{ texte }}</p>
-	</div>
+  <div class="alert alert-block {{ alertType }}">
+    <h4>Visites</h4>
+    <p>{{ texte }}</p>
+  </div>
 	
 </div>
 <div class="span5 offset1">
 
 {% if errors is not empty %}
-		<div class="alert alert-box alert-error">
-			<h4>Erreur !</h4>
-			<p>
-				<ul class="unstyled">
-					{% for error in errors %}
-					<li>- {{ error }}</li>
-					{% endfor %}
-				</ul>
-			</p>
-		</div>
+    <div class="alert alert-box alert-error">
+      <h4>Erreur !</h4>
+      <p>
+        <ul class="unstyled">
+          {% for error in errors %}
+          <li>- {{ error }}</li>
+          {% endfor %}
+        </ul>
+      </p>
+    </div>
 {% endif %}
 
 
 {% set tab = {'id':bien[0].idbien} %}
 <form class="form-control" method="post" action="{{ queries('visites', 'saisir', tab) }}" {% set tab = {} %} form-control-action="{{ queries('visites','controle_saisie',tab) }}">
-	<fieldset>
-		<legend>Visiter ce bien</legend>
-		<p>
-			Entrez vos informations personnelles afin d'enregistrer votre demande.
-		</p>
-		<div class="input-append input-prepend form-control-group">
-			<span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-			<input class="span9 form-element" type="text" id="nom" name="nom" value="{{ values.nom }}" required />
-			<label for="nom" class="add-on form-label">Nom</label>
-		</div>
-		<div class="input-append input-prepend form-control-group">
-			<span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-			<input class="span9 form-element" type="text" id="adresse" name="adresse" value="{{ values.adresse }}" required/>
-			<label for="adresse" class="add-on">Adresse</label>
-		</div>
-		<div class="input-append input-prepend form-control-group">
-			<span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-			<input class="span9 form-element" type="text" id="tel" name="tel" value="{{ values.tel }}" placeholder="Format : 0XXXXXXXXX" required/>
-			<label for="tel" class="add-on">Téléphone</label>
-		</div>
-		<div class="input-append input-prepend form-control-group">
-			<span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-			<input class="span9 form-element" type="email" id="email" name="email" value="{{ values.email }}" required/>
-			<label for="email" class="add-on">E-mail</label>
-		</div>
-		<div class="input-append input-prepend form-control-group">
-			<span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-			<input class="span9 form-element" type="text" id="dispo" name="dispo" value="{{ values.dispo }}" required/>
-			<label for="dispo" class="add-on">Disponibilités</label>
-		</div>
-		<div class="well">
-			<p>Veuillez répondre à la question suivante :<br/>
-			<em>{{ getAntiSpam().getMessage() }}</em>
-			</p>
-			<input class="span9" type="text" id="antiSpam" name="antiSpam" value="{{ getAntiSpam().getResult() }}" required/>
-		</div>
-		<div>
-			<input class="btn btn-block btn-primary form-submit" type="submit" value="Valider" />
-			<input type="hidden" name="filled" value="true" />
-		</div>
-	</fieldset>
+  <fieldset>
+    <legend>Visiter ce bien</legend>
+    <p>
+      Entrez vos informations personnelles afin d'enregistrer votre demande.
+    </p>
+    <div class="input-append input-prepend form-control-group">
+      <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
+      <input class="span9 form-element" type="text" id="nom" name="nom" value="{{ values.nom }}" required />
+      <label for="nom" class="add-on form-label">Nom</label>
+    </div>
+    <div class="input-append input-prepend form-control-group">
+      <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
+      <input class="span9 form-element" type="text" id="adresse" name="adresse" value="{{ values.adresse }}" required/>
+      <label for="adresse" class="add-on">Adresse</label>
+    </div>
+    <div class="input-append input-prepend form-control-group">
+      <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
+      <input class="span9 form-element" type="text" id="tel" name="tel" value="{{ values.tel }}" placeholder="Format : 0XXXXXXXXX" required/>
+      <label for="tel" class="add-on">Téléphone</label>
+    </div>
+    <div class="input-append input-prepend form-control-group">
+      <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
+      <input class="span9 form-element" type="email" id="email" name="email" value="{{ values.email }}" required/>
+      <label for="email" class="add-on">E-mail</label>
+    </div>
+    <div class="input-append input-prepend form-control-group">
+      <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
+      <input class="span9 form-element" type="text" id="dispo" name="dispo" value="{{ values.dispo }}" required/>
+      <label for="dispo" class="add-on">Disponibilités</label>
+    </div>
+    <div class="well">
+      <p>Veuillez répondre à la question suivante :<br/>
+      <em>{{ getAntiSpam().getMessage() }}</em>
+      </p>
+      <input class="span9" type="text" id="antiSpam" name="antiSpam" value="{{ getAntiSpam().getResult() }}" required/>
+    </div>
+    <div>
+      <input class="btn btn-block btn-primary form-submit" type="submit" value="Valider" />
+      <input type="hidden" name="filled" value="true" />
+    </div>
+  </fieldset>
 </form>
 
 </div>

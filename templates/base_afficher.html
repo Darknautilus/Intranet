@@ -5,28 +5,28 @@
 {% block content %}
 
 <div class="row-fluid">
-	<div class="span10">
-		<h2>Affichage de la base</h2>
-		<p>Sélectionnez la table que vous voulez afficher</p>
-	</div>
+  <div class="span10">
+    <h2>Affichage de la base</h2>
+    <p>Sélectionnez la table que vous voulez afficher</p>
+  </div>
 </div>
 <div class="row-fluid">
-	<div class="accordion span10" id="accordion2">
-  		{% for table in tables %}
-  		<div class="accordion-group">
-    		<div class="accordion-heading">
-    			{% set tab = {} %}
-      			<a class="accordion-toggle btn" data-toggle="collapse" data-target="#{{ table }}" onclick="baseRequest(setAccordionBody,'{{ table }}', '{{ queries('base', 'afficher', tab) }}');">
-        		Table "{{ table }}" <span class="loader_image" style="display:none;"><img src="{{ images() }}/loader.gif" alt="loader" /></span>
-      			</a>
-    		</div>
-    		<div id="{{ table }}" class="accordion-body collapse">
-      			<div class="content accordion-inner">
-      			</div>
-    		</div>
-  		</div>
-  		{% endfor %}
-	</div>
+  <div class="accordion span10" id="accordion2">
+    {% for table in tables %}
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        {% set tab = {} %}
+        <a class="accordion-toggle btn" data-toggle="collapse" data-target="#{{ table }}" onclick="baseRequest(setAccordionBody,'{{ table }}', '{{ queries('base', 'afficher', tab) }}');">
+          Table "{{ table }}" <span class="loader_image" style="display:none;"><img src="{{ images() }}/loader.gif" alt="loader" /></span>
+        </a>
+      </div>
+      <div id="{{ table }}" class="accordion-body collapse">
+        <div class="content accordion-inner">
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 
 {% endblock %}
