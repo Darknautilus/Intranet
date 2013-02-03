@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block title %}Affichage de mon caddie{% endblock %}
+
+{% block content %}
+
+
+<h2 class="page-header">Affichage de mon caddie</h2>
+
+{% if visites is not empty %}
+<table class="table table-bordered">
+  <tr>
+    <th>Titre du bien</th>
+    <th>Adresse</th>
+    <th>Prix</th>
+    <th>Priorité</th>
+    <th></th>
+  </tr>
+  {% for visite in visites %}
+  <tr>
+    <td>{{ visite.titrebien }}</td>
+    <td>{{ visite.adrbien }}</td>
+    <td>{{ visite.prixbien }}</td>
+    <td>
+      <form class="formGererVisitesCaddie form-horizontal" method="post" action="{{ queries('visites','caddie_gerer',{}) }}">
+        <p><select name="priorite">
+            {% for i in 1..5 %}
+            <option value="{{ i }}" {% if visite.priorite == i %}selected = "selected"{% endif %}>{{ i }}</option>
+            {% endfor %}
+          </select>
+          <button class="btn" type="submit">Modifier</button>
+          <input type="hidden" id="idbien" name="idbien" value="{{ visite.idbien }}" />
+          <input type="hidden" id="filled" name="filled" value="true" />
+          <input type="hidden" name="modify" value ="true" />
+        </p>
+      </form>
+    </td>
+    <td>
+      <form class="formGererVisitesCaddie" method="post" action="{{ queries('visites','caddie_gerer',{}) }}">
+        <button class="btn" type="submit">Supprimer</button>
+        <input type="hidden" id="idbien" name="idbien" value="{{ visite.idbien }}" />
+        <input type="hidden" id="filled" name="filled" value="true" />
+        <input type="hidden" name="modify" value ="true" />
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<div class="well">
+  <h3>Caddie vide</h3>
+  <p>Vous n'avez pas de visite enregistrée</p>
+</div>
+{% endif %}
+
+{% endblock %}

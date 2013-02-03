@@ -64,7 +64,7 @@
         <p class="alert alert-success alert-box">Visite ajoutée avec la priorite {{ priorite }}</p>
       {% else %}
 		    {% if multiple == true %}
-		    <form class="formAjouteVisiteCaddie" method="post" action="{{ queries('visites','caddie_ajouter',{}) }}">
+		    <form class="formGererVisitesCaddie" method="post" action="{{ queries('visites','caddie_gerer',{}) }}">
 		       <p><label for="priorite">Priorité :</label>
 			       <select name="priorite">
 			         {% for i in 1..5 %}

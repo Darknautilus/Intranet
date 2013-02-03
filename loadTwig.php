@@ -55,6 +55,13 @@
 		return $_SESSION["antiSpam"];
 	}
 	
+	function getNbVisitesCaddie() {
+	  if(isset($_SESSION["panier"]))
+	    return count($_SESSION["panier"]);
+	  else
+	    return 0;
+	}
+	
 	
 	Twig_Autoloader::register();
 
@@ -78,3 +85,4 @@
 	$twig->addFunction("getAntiSpam", new Twig_Function_Function("getAntiSpam"));
 	$twig->addFunction("visitesCaddie", new Twig_Function_Function("visitesCaddie"));
 	$twig->addFunction("visiteExiste", new Twig_Function_Function("visiteExiste"));
+	$twig->addFunction("getNbVisitesCaddie", new Twig_Function_Function("getNbVisitesCaddie"));

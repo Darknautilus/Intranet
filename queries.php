@@ -36,7 +36,8 @@ $MODULES = array(
 	"visites" => array(
 		"saisir",
 		"controle_saisie",
-	  "caddie_ajouter"
+	  "caddie_gerer",
+	  "afficher_panier"
 		),
 	"base" => array(
 		"afficher",

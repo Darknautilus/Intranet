@@ -28,9 +28,13 @@ function getXMLHttpRequest() {
 /* Envoi de formulaire de visite															*/
 /* **************************************************************************************** */
 
+function majMarkupCaddie(nbVisites) {
+	$(".markupCaddie").html("<a href=\"{{ queries('visites','afficher_panier',{}) }}\">Mon <i class=\"icon-shopping-cart\"></i> : <span class=\"badge badge-success\">"+nbVisites+"</span></a>");
+}
+
 $(document).ready(function() {
 	
-	$(".formAjouteVisiteCaddie").submit(function(e) {
+	$(".formGererVisitesCaddie").submit(function(e) {
 		var form = $(this);
 		var idbien = $("#idbien").val();
 		var priorite = $("#priorite").val();
@@ -41,12 +45,42 @@ $(document).ready(function() {
             data: form.serialize(),
             dataType: "json",
             success: function(data){
-                if(data.result) {
-                    form.parent().html("<p class=\"alert alert-success alert-block\">Visite ajoutée avec la priorite "+data.priorite+"</p>");
-                }
-                else {
-                	form.parent().html("<p class=\"alert alert-block\">Visite déjà ajoutée avec la priorite "+data.priorite+"</p>");
-                }
+            	if(data.modify == "modified") {
+            		if(data.result) {
+            			form.parent().find(".alert").remove();
+            			form.parent().prepend("<p class=\"alert alert-success alert-block\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>Visite modifiée avec la priorité "+data.priorite+"</p>");
+            		}
+            		else {
+            			form.parent().find(".alert").remove();
+            			form.parent().prepend("<p class=\"alert alert-danger alert-block\">Cette visite n'existe pas !</p>");
+            		}
+            	}
+            	else if(data.modify == "deleted") {
+            		if(data.result) {
+            			form.parent().parent().remove();
+            		}
+            		else {
+            			form.parent().find(".alert").remove();
+            			form.parent().prepend("<p class=\"alert alert-danger alert-block\">Cette visite n'existe pas !</p>");
+            		}
+            	}
+            	else {
+            		if(data.result) {
+            			form.parent().html("<p class=\"alert alert-success alert-block\">Visite ajoutée avec la priorite "+data.priorite+"</p>");
+            		}
+            		else {
+            			form.parent().html("<p class=\"alert alert-block\">Visite déjà ajoutée avec la priorite "+data.priorite+"</p>");
+            		}
+            	}
+            	if(data.nbVisites > 0) {
+            		$(".markupCaddie").css("display","block");
+            		majMarkupCaddie(data.nbVisites);
+            	}
+            	else if(data.nbVisites == 0) {
+            		$(".markupCaddie").css("display","none");
+            		// On recharge la page
+            		location.reload();
+            	}
             }
 		});
 		return false;
