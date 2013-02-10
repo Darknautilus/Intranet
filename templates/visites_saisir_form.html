@@ -1,0 +1,47 @@
+{% macro saisir_form(action, control_action, values) %}
+
+<form class="form-control" method="post" action="{{ action }}" form-control-action="{{ control_action }}">
+  <fieldset>
+    <legend>Visiter ce bien</legend>
+    <p>
+      Entrez vos informations personnelles afin d'enregistrer votre demande.
+    </p>
+    <div class="input-append input-prepend form-control-group">
+      <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
+      <input class="span9 form-element" type="text" id="nom" name="nom" value="{{ values.nom }}" required />
+      <label for="nom" class="add-on form-label">Nom</label>
+    </div>
+    <div class="input-append input-prepend form-control-group">
+      <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
+      <input class="span9 form-element" type="text" id="adresse" name="adresse" value="{{ values.adresse }}" required/>
+      <label for="adresse" class="add-on">Adresse</label>
+    </div>
+    <div class="input-append input-prepend form-control-group">
+      <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
+      <input class="span9 form-element" type="text" id="tel" name="tel" value="{{ values.tel }}" placeholder="Format : 0XXXXXXXXX" required/>
+      <label for="tel" class="add-on">Téléphone</label>
+    </div>
+    <div class="input-append input-prepend form-control-group">
+      <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
+      <input class="span9 form-element" type="email" id="email" name="email" value="{{ values.email }}" required/>
+      <label for="email" class="add-on">E-mail</label>
+    </div>
+    <div class="input-append input-prepend form-control-group">
+      <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
+      <input class="span9 form-element" type="text" id="dispo" name="dispo" value="{{ values.dispo }}" required/>
+      <label for="dispo" class="add-on">Disponibilités</label>
+    </div>
+    <div class="well">
+      <p>Veuillez répondre à la question suivante :<br/>
+      <em>{{ getAntiSpam().getMessage() }}</em>
+      </p>
+      <input class="span9" type="text" id="antiSpam" name="antiSpam" value="{{ getAntiSpam().getResult() }}" required/>
+    </div>
+    <div>
+      <input class="btn btn-block btn-primary form-submit" type="submit" value="Valider" />
+      <input type="hidden" name="filled" value="true" />
+    </div>
+  </fieldset>
+</form>
+
+{% endmacro %}

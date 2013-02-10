@@ -111,8 +111,9 @@
 
 <!-- Affichage du markup de caddie (nombre de visites) -->
 {% set nbVisites = getNbVisitesCaddie() %}
+{% set link = queries('visites','afficher_panier',{}) %}
 {% if nbVisites > 0 %}
-  <script>$(document).ready(function(){majMarkupCaddie({{ nbVisites }})});</script>
+  <script>$(document).ready(function(){majMarkupCaddie({{ nbVisites }},"{{ link }}")});</script>
 {% endif %}
 
 </body>

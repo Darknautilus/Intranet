@@ -28,8 +28,8 @@ function getXMLHttpRequest() {
 /* Envoi de formulaire de visite															*/
 /* **************************************************************************************** */
 
-function majMarkupCaddie(nbVisites) {
-	$(".markupCaddie").html("<a href=\"{{ queries('visites','afficher_panier',{}) }}\">Mon <i class=\"icon-shopping-cart\"></i> : <span class=\"badge badge-success\">"+nbVisites+"</span></a>");
+function majMarkupCaddie(nbVisites, action) {
+	$(".markupCaddie").html("<a href=\""+action+"\">Mon <i class=\"icon-shopping-cart\"></i> : <span class=\"badge badge-success\">"+nbVisites+"</span></a>");
 }
 
 $(document).ready(function() {
