@@ -76,6 +76,7 @@
 		         <input class="btn" type="submit" value="Visiter" />
 		         <input type="hidden" id="idbien" name="idbien" value="{{ bien.idbien }}" />
 		         <input type="hidden" id="filled" name="filled" value="true" />
+		         <input type="hidden" name="caddieMarkupLink" value="{{ queries('visites','afficher_panier',{}) }}" />
 		       </p>
 		    </form>
 		    {% else %}

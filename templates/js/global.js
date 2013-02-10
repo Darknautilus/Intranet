@@ -38,6 +38,7 @@ $(document).ready(function() {
 		var form = $(this);
 		var idbien = $("#idbien").val();
 		var priorite = $("#priorite").val();
+		var caddieMarkupLink = $(this).find("input[name='caddieMarkupLink']").val();
 		
 		$.ajax({
 			type: form.attr("method"),
@@ -74,7 +75,7 @@ $(document).ready(function() {
             	}
             	if(data.nbVisites > 0) {
             		$(".markupCaddie").css("display","block");
-            		majMarkupCaddie(data.nbVisites);
+            		majMarkupCaddie(data.nbVisites, caddieMarkupLink);
             	}
             	else if(data.nbVisites == 0) {
             		$(".markupCaddie").css("display","none");
