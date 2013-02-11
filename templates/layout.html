@@ -3,16 +3,18 @@
 <head>
 	<meta charset="utf-8" />
 	
+	
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+    
+  <link rel="stylesheet" href="{{ bootstrap() }}/css/bootstrap.min.css" />
+  
 	<!-- Ajoute la compatibilité avec les téléphones -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="{{ bootstrap() }}/css/bootstrap-responsive.css" rel="stylesheet">
 	
-	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    
-    <link rel="stylesheet" href="{{ bootstrap() }}/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="{{ css() }}/global.css" />
 	
 	<link rel="stylesheet" href="{{ css() }}/font-awesome.min.css" />
@@ -21,11 +23,11 @@
 	<![endif] -->
 	
 	<style type="text/css">
-      .main {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
+    .main {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+  </style>
 	
 	<title>{% block title %}{% endblock %} - Agence Kiloücher</title>
 </head>
