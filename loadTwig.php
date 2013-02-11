@@ -62,6 +62,10 @@
 	    return 0;
 	}
 	
+	function isLogged() {
+	  return $GLOBALS["logged"];
+	}
+	
 	
 	Twig_Autoloader::register();
 
@@ -86,3 +90,4 @@
 	$twig->addFunction("visitesCaddie", new Twig_Function_Function("visitesCaddie"));
 	$twig->addFunction("visiteExiste", new Twig_Function_Function("visiteExiste"));
 	$twig->addFunction("getNbVisitesCaddie", new Twig_Function_Function("getNbVisitesCaddie"));
+	$twig->addFunction("isLogged", new Twig_Function_Function("isLogged"));
