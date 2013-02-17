@@ -10,6 +10,7 @@ class BDD {
 private $errors = array();
 private $bdd = NULL;
 private $lastError;
+private $tables;
 
 /*
  * Constructeur de la classe :
@@ -19,6 +20,17 @@ function __construct() {
 	try {
 		$this->bdd = new PDO(DBHEADER, DBUSER, DBPASSWD);
 		$this->bdd->exec("SET NAMES UTF8");
+		
+		// Remplissage de la liste des tables
+		$this->tables = array();
+		$tables = $this->select("SHOW TABLES;");
+		if($tables != false) {
+		  foreach($tables as $elem) {
+		    $this->tables[] = $elem["Tables_in_".DBNAME];
+		  }
+		}
+		
+		
 	}
 	catch (PDOException $e) {
 		$this->errors[] = $e->getMessage();
@@ -32,6 +44,10 @@ function getBDD() {
 
 function getLastError() {
 	return $this->lastError;
+}
+
+function getTables() {
+  return $this->tables;
 }
 
 /*
@@ -109,7 +125,7 @@ function update ($table, $colonnes, $conditions) {
 	$sql .= join(', ', $colonnes_) ;
 	$sql .= ' WHERE ' . join(' AND ', $conditions_) ;
 	
-	var_dump($sql);
+	//var_dump($sql);
  
 	try {
 		$resultat = $this->bdd->exec($sql);
@@ -141,7 +157,7 @@ function delete ($table, $conditions) {
  
 	$sql = "DELETE FROM $table WHERE " . join(' AND ', $conditions_) ;
 	
-	var_dump($sql);
+	//var_dump($sql);
 	
 	try {
 		$resultat = $this->bdd->exec($sql) ;
@@ -196,6 +212,34 @@ function insert ($table, $valeurs) {
 		$this->errors[] = $this->lastError;
 		return false;
 	}
+}
+
+/*
+ * Teste l'existence d'une table ou d'un élément d'une table
+ * Paramètres :
+ *   $_table : la table à tester
+ *   $_field (optionnel) : le champ de la clé primaire de $_table
+ *   $_value (optionnel) : la valeur de la clé primaire de l'élément recherché
+ *   
+ * Si les paramètres $_field et $_value ne sont pas donnés, teste si la $_table existe (retourne true ou false).
+ * Si un seul des deux paramètres $_field ou $_value est donné, retourne false.
+ * Si $_field et $_value sont donnés, cherche l'élément correspondant et retourne true si trouvé et false sinon.
+ */
+function exists($_table, $_field = null, $_value = null) {
+  if(($_field == null || $_value == null) && $_field != $_value) {
+    return false;
+  }
+  else if($_field == null) {
+    foreach ($this->tables as $table) {
+      if($table == $_table)
+        return true;
+    }
+    return false;
+  }
+  else {
+    $element = $this->select("select ".$_field." from ".$_table." where ".$_field."='".$_value."';");
+    return $element;
+  }
 }
 	
 }
