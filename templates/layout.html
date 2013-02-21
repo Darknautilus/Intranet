@@ -3,16 +3,17 @@
 <head>
 	<meta charset="utf-8" />
 	
+	
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+    
+  <link rel="stylesheet" href="{{ bootstrap() }}/css/bootstrap.min.css" />
+    
 	<!-- Ajoute la compatibilité avec les téléphones -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="{{ bootstrap() }}/css/bootstrap-responsive.min.css" rel="stylesheet">
-	
-	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    
-    <link rel="stylesheet" href="{{ bootstrap() }}/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="{{ css() }}/global.css" />
 	
 	<link rel="stylesheet" href="{{ css() }}/font-awesome.min.css" />
@@ -45,20 +46,37 @@
 				
 				<a class="brand" href="{{ root() }}">Agence Kiloücher</a>
 				
+				<ul class="nav hidden-desktop">
+				  <li class="markupCaddie"></li>
+				</ul>
+				
 				<div class="nav-collapse collapse navbar-responsive-collapse">
 					<ul class="nav">
 						<li><a href="{{ queries('biens','afficher',{}) }}">Affichage biens</a></li>
 						<li><a href="{{ queries('base','afficher',{}) }}">Affichage base</a></li>
 					</ul>
-					<div class="pull-right">
-					 <ul class="nav">
-					   <li class="markupCaddie"></li>
-					 </ul>
-					 <form class="navbar-search" method="post" action="{{ queries('biens','rechercher',{}) }}">
-              <input class="search-query" type="text" id="search" name="search" placeholder="Rechercher 3 mots maximum" />
-              <input type="hidden" name="filled" id="filled" value="true" />
-           </form>
-					</div>
+				  <ul class="nav pull-right">
+				    <li class="markupCaddie visible-desktop"></li>
+				    {% if isLogged() %}
+				    <li class="dropdown">
+				      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                My Kiloücher
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ queries('admin','home',{}) }}">Mon espace perso</a></li>
+				        <li><a href="{{ queries('client','deconnexion',{}) }}">Déconnexion</a></li>
+              </ul>
+				   </li>
+				   {% else %}
+				   {% include "client_form_connexion_inPopover.html" %}
+           <li><a href="#" class="html-popover-trigger" html-popover-content="#formConnect" data-placement="bottom" title="Connexion à My Kiloücher">Mes demandes</a></li>
+				   {% endif %}
+				 </ul>
+				 <form class="navbar-search" method="post" action="{{ queries('biens','rechercher',{}) }}">
+           <input class="search-query" type="text" id="search" name="search" placeholder="Rechercher 3 mots maximum" />
+           <input type="hidden" name="filled" id="filled" value="true" />
+         </form>
 				</div>
 			</div>
 		</div>
@@ -79,6 +97,12 @@
 				<li><a href="{{ queries('biens','rechercher',tab) }}">Recherche d'un bien à visiter (client nouveau)</a></li>
 				<li><a href="{{ queries('biens','rechercher',{'multiple':1}) }}">Recherche de plusieurs biens à visiter (client nouveau)</a></li>
 				<li><a href="{{ queries('visites','afficher_panier',{}) }}">Voir les visites</a></li>
+				{% if isLogged() %}
+        <li><a href="{{ queries('admin','home',{}) }}">Mon espace perso</a></li>
+        <li><a href="{{ queries('client','deconnexion',{}) }}">Déconnexion</a></li>
+        {% else %}
+        <li><a href="#" class="html-popover-trigger" html-popover-content="#formConnect" data-placement="top" title="Connexion à My Kiloücher">Client déjà enregistré</a></li>
+        {% endif %}
 				<li><a href="{{ queries('base','afficher',tab) }}">Affichage base</a></li>
 				<li class="visible-phone"><a href="#" class="html-popover-trigger" html-popover-content="#confirmRAZ" data-placement="top" title="Attention !">RAZ Base !</a></li>
 			</ul>

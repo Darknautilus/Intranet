@@ -25,12 +25,12 @@
     <td>{{ visite.prixbien }}</td>
     <td>
       <form class="formGererVisitesCaddie form-horizontal" method="post" action="{{ queries('visites','caddie_gerer',{}) }}">
-        <p><select name="priorite">
+        <p><select class="span3" name="priorite">
             {% for i in 1..5 %}
             <option value="{{ i }}" {% if visite.priorite == i %}selected = "selected"{% endif %}>{{ i }}</option>
             {% endfor %}
           </select>
-          <button class="btn" type="submit">Modifier</button>
+          <input class="btn" type="submit" value="Modifier" />
           <input type="hidden" id="idbien" name="idbien" value="{{ visite.idbien }}" />
           <input type="hidden" id="filled" name="filled" value="true" />
           <input type="hidden" name="modify" value ="true" />

@@ -163,6 +163,12 @@ function delete ($table, $conditions) {
  * Retourne l'id de l'élément inséré si l'insertion s'est faite correctement. Si l'insertion s'est faite correctement mais qu'on ne peut récupérer d'id, retourne 1. Sinon, retourne false.
  */
 function insert ($table, $valeurs) {
+  
+  foreach($valeurs as $key => $value) {
+    if($value == null)
+      unset($valeurs[$key]);
+  }
+  
 	$colonnes_ = array_keys($valeurs) ;
 	$valeurs_ = array_values($valeurs) ;
 	foreach($valeurs_ as $clef => $valeur) {

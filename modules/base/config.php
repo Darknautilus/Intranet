@@ -1,7 +1,5 @@
 <?php
 
-include(PATH_MODELES."/bdd.class.php");
-
 $bdd = new BDD();
 $tables = $bdd->select("SHOW TABLES;");
 if($tables != false) {

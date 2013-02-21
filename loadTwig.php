@@ -62,7 +62,13 @@
 	    return 0;
 	}
 	
-	
+	function isLogged() {
+	  return $GLOBALS["logged"];
+	}
+	function getMembInfos() {
+	  return $GLOBALS["infoscli"];
+	}
+		
 	Twig_Autoloader::register();
 
 	$loader = new Twig_Loader_Filesystem(dirname(__FILE__).'/templates');
@@ -86,3 +92,5 @@
 	$twig->addFunction("visitesCaddie", new Twig_Function_Function("visitesCaddie"));
 	$twig->addFunction("visiteExiste", new Twig_Function_Function("visiteExiste"));
 	$twig->addFunction("getNbVisitesCaddie", new Twig_Function_Function("getNbVisitesCaddie"));
+	$twig->addFunction("isLogged", new Twig_Function_Function("isLogged"));
+	$twig->addFunction("getMembInfos", new Twig_Function_Function("getMembInfos"));

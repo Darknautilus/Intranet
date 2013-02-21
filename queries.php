@@ -13,7 +13,9 @@ $DEFAULT_ACTION = array(
 	"index" => "show",
 	"biens" => "afficher",
 	"visites" => "saisir",
-	"base" => "afficher"
+	"base" => "afficher",
+  "client" => "connexion",
+  "admin" => "home"
 );
 
 $GLOBALS["DEFAULT_ACTION"] = $DEFAULT_ACTION;
@@ -42,7 +44,14 @@ $MODULES = array(
 	"base" => array(
 		"afficher",
 		"raz"
-		)
+		),
+  "client" => array(
+    "connexion",
+    "deconnexion"
+    ),
+  "admin" => array(
+    "home"
+    )
 	);
 
 $GLOBALS["MODULES"] = $MODULES;
@@ -52,7 +61,6 @@ $GLOBALS["MODULES"] = $MODULES;
 	array(module => nom_fichier)
 */
 $MODULES_CONFIG = array(
-	"biens" => "config",
 	"visites" => "config",
 	"base" => "config"
 );

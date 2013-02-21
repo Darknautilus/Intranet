@@ -1,5 +1,61 @@
 <?php
 
+function majGlobals() {
+  if(isset($_COOKIE["logged"])) {
+    $GLOBALS["logged"] = $_COOKIE["logged"];
+    $GLOBALS["infoscli"] = getCookie("infoscli");
+  }
+  else if(isset($_SESSION["logged"])) {
+    $GLOBALS["logged"] = $_SESSION["logged"];
+    $GLOBALS["infoscli"] = $_SESSION["infoscli"];
+  }
+  else {
+    $GLOBALS["logged"] = false;
+  }
+
+//   if($GLOBALS["logged"]) {
+//     if(!isset($_SESSION["grpMb"])) {
+//       majGrpMb();
+//       majGrpMbPlus();
+//     }
+//     $GLOBALS["grpMb"] = $_SESSION["grpMb"];
+//     $GLOBALS["grpMbPlus"] = $_SESSION["grpMbPlus"];
+//   }
+}
+majGlobals();
+
+function creerCookie($name, $value) {
+  if(is_array($value)) {
+    $cookie = "";
+    foreach ($value as $key => $field) {
+      $cookie .= $key."=".$field.";;";
+    }
+  }
+  else {
+    $cookie = $value;
+  }
+  setcookie($name, urlencode($cookie), time()+3600*24*365);
+}
+
+function getCookie($name) {
+  if(!isset($_COOKIE[$name])) {
+    return false;
+  }
+  else if(!strpos(urldecode($_COOKIE[$name]), ";;")) {
+    return urldecode($_COOKIE[$name]);
+  }
+  else {
+    $values = array();
+    $couples = explode(";;", urldecode($_COOKIE[$name]));
+    foreach($couples as $couple) {
+      $list = explode("=",$couple);
+      if(!empty($list[0]))
+        $values[$list[0]] = $list[1];
+    }
+    return $values;
+  }
+}
+
 function visitesCaddie() {
   if(isset($_SESSION["panier"]))
     return $_SESSION["panier"];

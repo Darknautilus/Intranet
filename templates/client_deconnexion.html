@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block title %}Déconnecté{% endblock %}
+
+{% block content %}
+
+<div class="alert alert-success span5">
+	<h4>Déconnecté</h4>
+	<p>Vous avez bien été déconnecté</p>
+	<a href="{{ queries('','',{}) }}" class="btn btn-block">Retour à l'accueil</a>
+</div>
+
+{% endblock %}

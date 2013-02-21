@@ -1,0 +1,94 @@
+{% set LOGGED_MEMBER = getMembInfos() %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  
+  
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+    
+  <link rel="stylesheet" href="{{ bootstrap() }}/css/bootstrap.min.css" />
+  
+  <!-- Ajoute la compatibilité avec les téléphones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="{{ bootstrap() }}/css/bootstrap-responsive.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="{{ css() }}/global.css" />
+  
+  <link rel="stylesheet" href="{{ css() }}/font-awesome.min.css" />
+  <!-- [if lt IE 8]>
+   <link rel="stylesheet" href="{{ css() }}/font-awesome-ie7.min.css" />
+  <![endif] -->
+  
+  <style type="text/css">
+    .main {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+  </style>
+  
+  <title>{% block title %}{% endblock %} - Agence Kiloücher</title>
+</head>
+
+<body>
+
+<header>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <ul class="nav">
+          <li><a href="{{ queries('','',{}) }}"><i class="icon-arrow-left"></i> Retour au site</a></li>
+        </ul>
+        <div class="nav-collapse collapse navbar-responsive-collapse">
+          <div class="pull-right">
+           <ul class="nav">
+             <li><a href="{{ queries('client','deconnexion',{}) }}">Déconnexion</a></li>
+           </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="main container-fluid">
+  <div id="notifications">
+  </div>
+  <div class="row-fluid">
+    <nav class="span2">
+      <ul class="nav nav-tabs nav-stacked">
+        <li></li>
+      </ul>
+    </nav>
+    <div class="span10">
+    {% block content %}
+    {% endblock %}
+    </div>
+  </div>
+</div>
+
+<footer>
+<div class="navbar navbar-inner navbar-fixed-bottom">
+<em class="brand">Espace perso de {{ LOGGED_MEMBER.nomclient }}</em>
+</div>
+</footer>
+
+<script src="{{ templates() }}/js/jquery-1.8.3.js"></script>
+<script src="{{ bootstrap() }}/js/bootstrap.min.js"></script>
+<script src="{{ templates() }}/js/global.js"></script>
+<script src="{{ templates() }}/js/bootstrap-overlay.js"></script>
+
+</body>
+</html>
