@@ -66,7 +66,7 @@
 	  return $GLOBALS["logged"];
 	}
 	function getMembInfos() {
-	  return $GLOBALS["infoscli"];
+	  return $GLOBALS["infos"];
 	}
 		
 	Twig_Autoloader::register();

@@ -14,7 +14,6 @@ $DEFAULT_ACTION = array(
 	"biens" => "afficher",
 	"visites" => "saisir",
 	"base" => "afficher",
-  "client" => "connexion",
   "admin" => "home"
 );
 
@@ -45,12 +44,11 @@ $MODULES = array(
 		"afficher",
 		"raz"
 		),
-  "client" => array(
-    "connexion",
-    "deconnexion"
-    ),
   "admin" => array(
-    "home"
+    "home",
+    "deconnexion",
+    "connexion",
+    "anciennes_demandes"
     )
 	);
 
@@ -62,7 +60,8 @@ $GLOBALS["MODULES"] = $MODULES;
 */
 $MODULES_CONFIG = array(
 	"visites" => "config",
-	"base" => "config"
+	"base" => "config",
+  "admin" => "filter"
 );
 
 $GLOBALS["MODULES_CONFIG"] = $MODULES_CONFIG;

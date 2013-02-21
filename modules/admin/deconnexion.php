@@ -17,14 +17,14 @@ if(isset($GLOBALS["logged"])) {
 
 	// On détruit les cookies
 	setcookie("logged", "", time()-3600);
-	setcookie("infoscli", "", time()-3600);
+	setcookie("infos", "", time()-3600);
 	
 	// Finalement, on détruit la session.
 	session_destroy();
 	
 	majGlobals();
 	
-	echo $twig->render("client_deconnexion.html", array());
+	echo $twig->render("admin_deconnexion.html", array());
 }
 else {
 	header("Location:".queries("", "", ""));

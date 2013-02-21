@@ -2,24 +2,19 @@
 <html lang="fr">
 <head>
 	<meta charset="utf-8" />
-	
-	
-	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-  <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
     
-  <link rel="stylesheet" href="{{ bootstrap() }}/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="{{ bootstrap() }}/css/bootstrap.css" />
     
 	<!-- Ajoute la compatibilité avec les téléphones -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="{{ bootstrap() }}/css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="{{ css() }}/global.css" />
 	
 	<link rel="stylesheet" href="{{ css() }}/font-awesome.min.css" />
 	<!-- [if lt IE 8]>
 	 <link rel="stylesheet" href="{{ css() }}/font-awesome-ie7.min.css" />
 	<![endif] -->
+
+	<link rel="stylesheet" href="{{ css() }}/global.css" />
 	
 	<style type="text/css">
       .main {
@@ -32,6 +27,8 @@
 </head>
 
 <body>
+
+{% include "client_form_connexion_inPopover.html" %}
 
 <header>
 	<div class="navbar navbar-fixed-top">
@@ -55,6 +52,10 @@
 						<li><a href="{{ queries('biens','afficher',{}) }}">Affichage biens</a></li>
 						<li><a href="{{ queries('base','afficher',{}) }}">Affichage base</a></li>
 					</ul>
+				 <form class="navbar-search" method="post" action="{{ queries('biens','rechercher',{}) }}">
+           <input class="search-query" type="text" id="search" name="search" placeholder="Rechercher 3 mots maximum" />
+           <input type="hidden" name="filled" id="filled" value="true" />
+         </form>
 				  <ul class="nav pull-right">
 				    <li class="markupCaddie visible-desktop"></li>
 				    {% if isLogged() %}
@@ -65,18 +66,13 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a href="{{ queries('admin','home',{}) }}">Mon espace perso</a></li>
-				        <li><a href="{{ queries('client','deconnexion',{}) }}">Déconnexion</a></li>
+				        <li><a href="{{ queries('admin','deconnexion',{}) }}">Déconnexion</a></li>
               </ul>
 				   </li>
 				   {% else %}
-				   {% include "client_form_connexion_inPopover.html" %}
-           <li><a href="#" class="html-popover-trigger" html-popover-content="#formConnect" data-placement="bottom" title="Connexion à My Kiloücher">Mes demandes</a></li>
+           <li class="hidden-phone"><a href="#" class="html-popover-trigger" html-popover-content="#formConnect" data-placement="bottom" title="Connexion à My Kiloücher">Mes demandes</a></li>
 				   {% endif %}
 				 </ul>
-				 <form class="navbar-search" method="post" action="{{ queries('biens','rechercher',{}) }}">
-           <input class="search-query" type="text" id="search" name="search" placeholder="Rechercher 3 mots maximum" />
-           <input type="hidden" name="filled" id="filled" value="true" />
-         </form>
 				</div>
 			</div>
 		</div>
@@ -124,9 +120,16 @@
 
 <footer>
 <div class="navbar navbar-inner navbar-fixed-bottom">
-<em class="brand">Par Aurélien Bertron, aurelienbertron[at]gmail[dot]com</em>
+<ul class="nav">
+  <li><a href="#">Par Aurélien Bertron, aurelienbertron[at]gmail[dot]com</a></li>
+</ul>
 </div>
 </footer>
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 
 <script src="{{ templates() }}/js/jquery-1.8.3.js"></script>
 <script src="{{ bootstrap() }}/js/bootstrap.min.js"></script>

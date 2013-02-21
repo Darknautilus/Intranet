@@ -1,4 +1,4 @@
-<form method="post" action="{{ queries('client','connexion',{}) }}">
+<form method="post" action="{{ queries('admin','connexion',{}) }}">
 <p>
 	<label for="numclient">Identifiant client :</label>
     <input type="text" id="numclient" name="numclient" placeholder="Identifiant client" />
@@ -8,6 +8,7 @@
       <input type="checkbox" id="cookie" name="cookie" value="true" /> Se souvenir de moi
   </label>
 	<input type="submit" class="btn btn-block" value="Valider" />
+	<input type="hidden" name="client" value="true" /> 
 	<input type="hidden" name="filled" value="true" />
 </p>
 </form>

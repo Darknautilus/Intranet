@@ -1,0 +1,28 @@
+{% extends 'layout-admin.html' %}
+
+{% block title %}Anciennes demandes{% endblock %}
+
+{% block content %}
+
+<div class="row-fluid">
+  <h2 class="page-header">Anciennes demandes <small class="visible-desktop">Votre historique de demandes de visites</small></h2>
+</div>
+<div class="row-fluid">
+  <div class="accordion span10" id="accordion2">
+    {% for demande in demandes %}
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle btn" data-toggle="collapse" data-target="#{{ demande.iddemande }}" onclick="baseRequest(setAccordionBody,'{{ demande.iddemande }}', '{{ queries('', '', {}) }}');">
+          Demande du {{ demande.datedemande }} <span class="loader_image" style="display:none;"><img src="{{ images() }}/loader.gif" alt="loader" /></span>
+        </a>
+      </div>
+      <div id="{{ demande.iddemande }}" class="accordion-body collapse">
+        <div class="content accordion-inner">
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

@@ -3,11 +3,11 @@
 function majGlobals() {
   if(isset($_COOKIE["logged"])) {
     $GLOBALS["logged"] = $_COOKIE["logged"];
-    $GLOBALS["infoscli"] = getCookie("infoscli");
+    $GLOBALS["infos"] = getCookie("infos");
   }
   else if(isset($_SESSION["logged"])) {
     $GLOBALS["logged"] = $_SESSION["logged"];
-    $GLOBALS["infoscli"] = $_SESSION["infoscli"];
+    $GLOBALS["infos"] = $_SESSION["infos"];
   }
   else {
     $GLOBALS["logged"] = false;
@@ -80,5 +80,36 @@ function modifierVisite($idbien, $priorite = null) {
     unset($_SESSION["panier"][$idbien]);
   else
     $_SESSION["panier"][$idbien] = $priorite;
+}
+
+/*
+ * @param $datetime La donnée datetime de la base
+ * @param $ret ALL : date et heure, DATE : seulement date, TIME : seulement heure
+ * @param $dateformat défaut : Séparateur de la date, MO_LETTERS : le mois en lettres
+ * @param $timeformat Séparateur de l'heure
+ */
+function sqlDatetimeToFrench($datetime, $ret = "ALL", $dateformat = "/", $timeformat = ":") {
+  
+  $months = array("janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre");
+  
+  list($date,$time) = explode(" ", $datetime);
+  list($year,$month,$day) = explode("-", $date);
+  list($hour,$minute,$second) = explode(":", $time);
+    
+  if($dateformat == "MO_LETTERS")
+    $date = $day." ".$months[(int)$month]." ".$year;
+  else
+    $date = $day.$dateformat.$month.$dateformat.$year;
+  
+  $time = $hour.$timeformat.$minute.$timeformat.$second;
+  
+  if($ret == "ALL")
+    return array($date,$time);
+  else if($ret == "DATE")
+    return $date;
+  else if($ret == "TIME")
+    return $time;
+  else
+    return false;
 }
 
