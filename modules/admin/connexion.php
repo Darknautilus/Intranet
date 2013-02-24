@@ -35,6 +35,8 @@ if(isset($_POST["filled"]) && !isLogged()) {
   			if($member[0]["emailclient"] != $_POST["email"]) {
   				$errors[] = "L'adresse email est incorrecte";
   			}
+  			// On rajoute un champ pour différencier le client de l'admin
+  			$member[0]["client"] = true;
   		}
   	}
   }

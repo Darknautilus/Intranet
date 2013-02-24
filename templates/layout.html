@@ -61,7 +61,7 @@
 				    {% if isLogged() %}
 				    <li class="dropdown">
 				      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                My Kiloücher
+                {{ getMembInfos().nomclient }}
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
@@ -95,7 +95,7 @@
 				<li><a href="{{ queries('visites','afficher_panier',{}) }}">Voir les visites</a></li>
 				{% if isLogged() %}
         <li><a href="{{ queries('admin','home',{}) }}">Mon espace perso</a></li>
-        <li><a href="{{ queries('client','deconnexion',{}) }}">Déconnexion</a></li>
+        <li><a href="{{ queries('admin','deconnexion',{}) }}">Déconnexion</a></li>
         {% else %}
         <li><a href="#" class="html-popover-trigger" html-popover-content="#formConnect" data-placement="top" title="Connexion à My Kiloücher">Client déjà enregistré</a></li>
         {% endif %}
