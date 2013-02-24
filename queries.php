@@ -48,7 +48,8 @@ $MODULES = array(
     "home",
     "deconnexion",
     "connexion",
-    "anciennes_demandes"
+    "anciennes_demandes",
+    "anciennes_demandes_visites"
     )
 	);
 

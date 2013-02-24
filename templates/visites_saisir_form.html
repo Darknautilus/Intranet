@@ -31,12 +31,6 @@
       <input class="span9 form-element" type="text" id="dispo" name="dispo" value="{{ values.dispo }}" required/>
       <label for="dispo" class="add-on">Disponibilités</label>
     </div>
-    <div class="well">
-      <p>Veuillez répondre à la question suivante :<br/>
-      <em>{{ getAntiSpam().getMessage() }}</em>
-      </p>
-      <input class="span9" type="text" id="antiSpam" name="antiSpam" value="{{ getAntiSpam().getResult() }}" required/>
-    </div>
     <div>
       <input class="btn btn-block btn-primary form-submit" type="submit" value="Valider" />
       <input type="hidden" name="filled" value="true" />

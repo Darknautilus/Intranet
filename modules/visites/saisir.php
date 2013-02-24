@@ -63,10 +63,6 @@ if($bien != false || $multiple) {
 		else
 		  $values["dispo"] = $_POST["dispo"];
 		
-		
-    if(!isset($_POST["antiSpam"]) || !($_SESSION["antiSpam"]->isCorrect($_POST["antiSpam"])))
-      $errors[] = "Vous devez entrer la réponse à la question posée.";
-		
     // Si le formulaire est correct, on insère les infos dans la base
     if(empty($errors)) {
       $idClientInser = $bdd->insert("client", array("nomclient" => $_POST["nom"], "adrclient" => $_POST["adresse"], "telclient" => $_POST["tel"], "emailclient" => $_POST["email"]));
@@ -100,9 +96,6 @@ if($bien != false || $multiple) {
     }
 		
   }
-	
-  // Génération aléatoire (pour la sécurité)
-  $_SESSION["antiSpam"] = new AntiSpam();
 	
   $bdd->close();
 }

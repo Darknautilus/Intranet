@@ -68,6 +68,10 @@
 	function getMembInfos() {
 	  return $GLOBALS["infos"];
 	}
+	function isAdmin() {
+	  $infos = getMembInfos();
+	  return isset($infos["admin"]);
+	}
 		
 	Twig_Autoloader::register();
 
@@ -94,3 +98,4 @@
 	$twig->addFunction("getNbVisitesCaddie", new Twig_Function_Function("getNbVisitesCaddie"));
 	$twig->addFunction("isLogged", new Twig_Function_Function("isLogged"));
 	$twig->addFunction("getMembInfos", new Twig_Function_Function("getMembInfos"));
+	$twig->addFunction("isAdmin", new Twig_Function_Function("isAdmin"));

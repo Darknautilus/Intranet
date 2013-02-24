@@ -1,6 +1,6 @@
 {% extends 'layout-admin.html' %}
 
-{% block title %}Anciennes demandes{% endblock %}
+{% block title %}Historique demandes - My Kiloücher{% endblock %}
 
 {% block content %}
 
@@ -12,7 +12,7 @@
     {% for demande in demandes %}
     <div class="accordion-group">
       <div class="accordion-heading">
-        <a class="accordion-toggle btn" data-toggle="collapse" data-target="#{{ demande.iddemande }}" onclick="baseRequest(setAccordionBody,'{{ demande.iddemande }}', '{{ queries('', '', {}) }}');">
+        <a class="accordion-toggle btn" data-toggle="collapse" data-target="#{{ demande.iddemande }}" onclick="pageCall('#{{ demande.iddemande }}', '{{ queries('admin', 'anciennes_demandes_visites', {'demande':demande.iddemande}) }}');">
           Demande du {{ demande.datedemande }} <span class="loader_image" style="display:none;"><img src="{{ images() }}/loader.gif" alt="loader" /></span>
         </a>
       </div>

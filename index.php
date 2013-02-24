@@ -51,6 +51,7 @@ $_COOKIE = array_map("htmlspecialchars", $_COOKIE);
  * Inclusion des modeles
  */
 include_once(PATH_MODELES."/bdd.class.php");
+include_once(PATH_MODELES."/anti-spam.class.php");
 
 /*
 	Démarrage de la temporisation de sortie

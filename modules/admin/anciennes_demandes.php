@@ -14,7 +14,6 @@ if(isset($client["idclient"])) {
   }
   
   echo $twig->render("admin_anciennes_demandes.html",array("demandes" => $demandes));
-  
 }
 else {
   echo $twig->render("admin_home.html", array());
