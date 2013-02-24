@@ -49,7 +49,8 @@ $MODULES = array(
     "deconnexion",
     "connexion",
     "anciennes_demandes",
-    "anciennes_demandes_visites"
+    "anciennes_demandes_visites",
+    "modifier_profil"
     )
 	);
 

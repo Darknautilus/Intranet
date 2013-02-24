@@ -108,8 +108,6 @@ function update ($table, $colonnes, $conditions) {
 	$sql = "UPDATE $table SET " ;
 	$sql .= join(', ', $colonnes_) ;
 	$sql .= ' WHERE ' . join(' AND ', $conditions_) ;
-	
-	var_dump($sql);
  
 	try {
 		$resultat = $this->bdd->exec($sql);

@@ -56,6 +56,31 @@ function getCookie($name) {
   }
 }
 
+function updateInfos($id, $content) {
+  // On vérifie que l'info voulue existe
+  if(isset($GLOBALS[$id])) {
+    // On modifie l'info dans chaque conteneur (session et cookie)
+    if(isset($_SESSION[$id])) {
+      foreach($content as $field => $value) {
+        $_SESSION[$id][$field] = $value;
+      }
+    }
+    $cookieInfos = getCookie($id);
+    if($cookieInfos) {
+      foreach ($content as $field => $value) {
+        if(isset($cookieInfos[$field]))
+          $cookieInfos[$field] = $value;
+      }
+      creerCookie($id, $cookieInfos);
+    }
+    majGlobals();
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
 function visitesCaddie() {
   if(isset($_SESSION["panier"]))
     return $_SESSION["panier"];
