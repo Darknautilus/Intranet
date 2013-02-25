@@ -1,0 +1,14 @@
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Nom</th>
+    <th>Prix</th>
+    <th>Photo</th>
+  </tr>
+  {% for bien in biens %}
+  <tr>
+    <td>{{ bien.titrebien }}</td>
+    <td>{{ bien.prixbien }}</td>
+    <td><img src="{{ images() }}/{{ bien.photoBien }}" alt="photo du bien {{ bien.photoBien }}" /></td>
+  </tr>
+  {% endfor %}
+</table>

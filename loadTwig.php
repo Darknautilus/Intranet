@@ -65,8 +65,27 @@
 	function isLogged() {
 	  return $GLOBALS["logged"];
 	}
-	
-	
+	function getMembInfos() {
+	  if(isset($GLOBALS["infos"]))
+	    return $GLOBALS["infos"];
+	  else
+	    return false;
+	}
+	function isClient() {
+	  $infos = getMembInfos();
+	  if(!$infos)
+	    return false;
+	  else
+	    return isset($infos["client"]);
+	}
+	function isAdmin() {
+	  $infos = getMembInfos();
+	  if(!$infos)
+	    return false;
+	  else
+	    return isset($infos["admin"]);
+	}
+		
 	Twig_Autoloader::register();
 
 	$loader = new Twig_Loader_Filesystem(dirname(__FILE__).'/templates');
@@ -91,3 +110,6 @@
 	$twig->addFunction("visiteExiste", new Twig_Function_Function("visiteExiste"));
 	$twig->addFunction("getNbVisitesCaddie", new Twig_Function_Function("getNbVisitesCaddie"));
 	$twig->addFunction("isLogged", new Twig_Function_Function("isLogged"));
+	$twig->addFunction("getMembInfos", new Twig_Function_Function("getMembInfos"));
+	$twig->addFunction("isClient", new Twig_Function_Function("isClient"));
+	$twig->addFunction("isAdmin", new Twig_Function_Function("isAdmin"));

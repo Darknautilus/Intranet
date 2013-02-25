@@ -7,7 +7,7 @@ $errors = array();
 $values = array("nom"=>"Cyrano de Bergerac","adresse"=>"rue du Panache","tel"=>"0745231254","email"=>"cyrano@laposte.net","dispo"=>"N'importe quand, l'épée au poing");
 $redirect = false;
 
-if(isset($_GET["multiple"]) && $_GET["multiple"] == true)
+if((isset($_GET["multiple"]) && $_GET["multiple"] == true))
   $multiple = true;
 else
   $multiple = false;
@@ -33,6 +33,15 @@ if($bien != false || $multiple) {
       $nbVisite = 0;
     else
       $nbVisite = $nbVisite[0]["nbvisite"];
+  }
+  
+  // Auto-remplissage des champs
+  if(isClient()) {
+    $client = getMembInfos();
+    $values["nom"] = $client["nomclient"];
+    $values["adresse"] = $client["adrclient"];
+    $values["tel"] = $client["telclient"];
+    $values["email"] = $client["emailclient"];
   }
 	
   // Controle du formulaire
@@ -63,15 +72,17 @@ if($bien != false || $multiple) {
 		else
 		  $values["dispo"] = $_POST["dispo"];
 		
-		
-    if(!isset($_POST["antiSpam"]) || !($_SESSION["antiSpam"]->isCorrect($_POST["antiSpam"])))
-      $errors[] = "Vous devez entrer la réponse à la question posée.";
-		
     // Si le formulaire est correct, on insère les infos dans la base
     if(empty($errors)) {
-      $idClientInser = $bdd->insert("client", array("nomclient" => $_POST["nom"], "adrclient" => $_POST["adresse"], "telclient" => $_POST["tel"], "emailclient" => $_POST["email"]));
-      if(!$idClientInser)
-        $errors[] = "Erreur insertion client : ".$bdd->getLastError();
+      if(isClient()) {
+        $idClientInser = $client["idclient"];
+      }
+      else {
+        $idClientInser = $bdd->insert("client", array("nomclient" => $_POST["nom"], "adrclient" => $_POST["adresse"], "telclient" => $_POST["tel"], "emailclient" => $_POST["email"]));
+        if(!$idClientInser)
+          $errors[] = "Erreur insertion client : ".$bdd->getLastError();
+      }
+      
       $idDemandeInser = $bdd->insert("demande", array("datedemande" => date("Y-m-j H:i:s"), "disponibilite" => $_POST["dispo"], "idclient" => $idClientInser));
       if(!$idDemandeInser)
         $errors[] = "Erreur insertion demande : ".$bdd->getLastError();
@@ -100,9 +111,6 @@ if($bien != false || $multiple) {
     }
 		
   }
-	
-  // Génération aléatoire (pour la sécurité)
-  $_SESSION["antiSpam"] = new AntiSpam();
 	
   $bdd->close();
 }

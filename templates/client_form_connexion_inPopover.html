@@ -1,13 +1,14 @@
 <div id="formConnect" style="display:none;">
-	<form method="post" action="{{ queries('client','connexion',{}) }}">
-		<label for="mdp">Identifiant client :</label>
-    <input class="span2" type="text" id="numclient" name="numclient" placeholder="Identifiant" />
+	<form method="post" action="{{ queries('admin','connexion',{}) }}">
+		<label for="numclient">Identifiant client :</label>
+		<input type="text" id="numclient" name="numclient" placeholder="Identifiant client" value="1" />
 		<label for="email">Adresse e-mail :</label>
-		<input class="span2" type="text" id="email" name="email" placeholder="E-mail" />
+		<input type="text" id="email" name="email" placeholder="E-mail" value="tuffery@cict.fr" />
 		<label class="checkbox" for="cookie">
 		  <input type="checkbox" id="cookie" name="cookie" value="true" /> Se souvenir de moi
 		</label>
-		<input type="submit" class="btn span2" value="Valider" />
+		<input type="submit" class="btn" value="Valider" />
+		<input type="hidden" name="client" value="true" />
 		<input type="hidden" name="filled" value="true" />
 	</form>
 </div>

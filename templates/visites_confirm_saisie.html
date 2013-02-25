@@ -6,8 +6,8 @@
 
 <div class="span8 offset2">
 	<div class="alert alert-box alert-success">
-		<h2>Demande de visite prise en compte</h2>
-		<p>Vous avez été enregistré avec le n° client suivant : <strong>{{ idclient }}</strong><br/>
+		<h2>Demande de visite prise en compte {% if isClient() %}pour {{ getMembInfos().nomclient }} (client n<sup>o</sup> {{ getMembInfos().idclient }}){% endif %}</h2>
+		{% if not isClient() %}<p>Vous avez été enregistré avec le n° client suivant : <strong>{{ idclient }}</strong><br/>{% endif %}
 		Votre demande de visite a bien été enregistrée avec le numéro <strong>{{ iddemande }}</strong> et vos disponibilités suivantes :<br/>
 		<strong>{{ dispo }}</strong>
 		</p>

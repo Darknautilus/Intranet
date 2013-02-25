@@ -50,10 +50,10 @@
     <th></th>
   </tr>
 {% for bien in biens %}
-  {% set tab = {'id':bien.idbien} %}
   {% if multiple == true %}
   <tr>
   {% else %}
+  {% set tab = {'id':bien.idbien} %}
   <tr onMouseOver="this.style.cursor='pointer'"  onclick="window.location.href='{{ queries('visites','saisir',tab) }}'">
   {% endif %}
     <td>{% autoescape false %}{{ bien.detailbien }}{% endautoescape %}</td>
@@ -80,7 +80,7 @@
 		       </p>
 		    </form>
 		    {% else %}
-		    <a class="btn" href="{{ queries('visites','saisir',{}) }}">Visiter</a>
+		    <a class="btn" href="{{ queries('visites','saisir',tab) }}">Visiter</a>
 		    {% endif %}
 	    {% endif %}
     </td>

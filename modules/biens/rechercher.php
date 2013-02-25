@@ -12,7 +12,6 @@ else
 
 if(isset($_POST["filled"]) && $_POST["filled"] == true) {
   // Formulaire rempli
-  
   if(isset($_POST["multiple"]))
     $multiple = true;
   else

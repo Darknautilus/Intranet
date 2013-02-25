@@ -1,5 +1,10 @@
 <?php
 
+/*
+ Initialisation des sessions
+*/
+session_cache_limiter('private_no_expire, must-revalidate');
+session_start();
 
 /*
 	Gestion des redirections URL
@@ -43,10 +48,10 @@ $_GET = array_map("htmlspecialchars", $_GET);
 $_COOKIE = array_map("htmlspecialchars", $_COOKIE);
 
 /*
- Initialisation des sessions
-*/
-
-session_start();
+ * Inclusion des modeles
+ */
+include_once(PATH_MODELES."/bdd.class.php");
+include_once(PATH_MODELES."/anti-spam.class.php");
 
 /*
 	Démarrage de la temporisation de sortie

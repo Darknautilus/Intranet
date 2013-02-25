@@ -1,0 +1,26 @@
+{% extends 'layout-admin.html' %}
+
+{% block title %}My Kiloücher{% endblock %}
+
+{% block content %}
+
+<div class="row-fluid">
+  <div class="span4 offset3 text-center">
+    <h3 class="header-page">Bonjour {{ LOGGED_MEMBER.nomclient }} !</h1>
+    <p>Choisissez une action</p>
+  </div>
+</div>
+<hr/>
+<div class="row-fluid">
+  <div class="span3 offset1">
+    <a href="{{ queries('admin','anciennes_demandes',{}) }}" class="btn btn-block btn-large">Anciennes demandes</a>
+  </div>
+  <div class="span3">
+    <a href="{{ queries('biens','rechercher',{'multiple':1}) }}" class="btn btn-block btn-large">Nouvelle demande</a>
+  </div>
+  <div class="span3">
+    <a href="{{ queries('admin','modifier_profil',{}) }}" class="btn btn-block btn-large">Editer profil</a>
+  </div>
+</div>
+
+{% endblock %}

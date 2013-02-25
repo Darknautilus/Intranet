@@ -8,34 +8,32 @@
     </p>
     <div class="input-append input-prepend form-control-group">
       <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-      <input class="span9 form-element" type="text" id="nom" name="nom" value="{{ values.nom }}" required />
+      <input class="span9 form-element" type="text" id="nom" name="nom" value="{{ values.nom }}" required="required" {% if isClient() %}readonly="readonly"{% endif %} />
       <label for="nom" class="add-on form-label">Nom</label>
     </div>
+    <br/>
     <div class="input-append input-prepend form-control-group">
       <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-      <input class="span9 form-element" type="text" id="adresse" name="adresse" value="{{ values.adresse }}" required/>
+      <input class="span9 form-element" type="text" id="adresse" name="adresse" value="{{ values.adresse }}" required="required" {% if isClient() %}readonly="readonly"{% endif %}/>
       <label for="adresse" class="add-on">Adresse</label>
     </div>
+    <br/>
     <div class="input-append input-prepend form-control-group">
       <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-      <input class="span9 form-element" type="text" id="tel" name="tel" value="{{ values.tel }}" placeholder="Format : 0XXXXXXXXX" required/>
+      <input class="span9 form-element" type="text" id="tel" name="tel" value="{{ values.tel }}" placeholder="Format : 0XXXXXXXXX" required="required" {% if isClient() %}readonly="readonly"{% endif %}/>
       <label for="tel" class="add-on">Téléphone</label>
     </div>
+    <br/>
     <div class="input-append input-prepend form-control-group">
       <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
-      <input class="span9 form-element" type="email" id="email" name="email" value="{{ values.email }}" required/>
+      <input class="span9 form-element" type="email" id="email" name="email" value="{{ values.email }}" required="required" {% if isClient() %}readonly="readonly"{% endif %}/>
       <label for="email" class="add-on">E-mail</label>
     </div>
+    <br/>
     <div class="input-append input-prepend form-control-group">
       <span class="add-on form-markup"><i class="icon-remove form-markup-invalid"></i><i class="icon-ok form-markup-valid"></i></span>
       <input class="span9 form-element" type="text" id="dispo" name="dispo" value="{{ values.dispo }}" required/>
       <label for="dispo" class="add-on">Disponibilités</label>
-    </div>
-    <div class="well">
-      <p>Veuillez répondre à la question suivante :<br/>
-      <em>{{ getAntiSpam().getMessage() }}</em>
-      </p>
-      <input class="span9" type="text" id="antiSpam" name="antiSpam" value="{{ getAntiSpam().getResult() }}" required/>
     </div>
     <div>
       <input class="btn btn-block btn-primary form-submit" type="submit" value="Valider" />

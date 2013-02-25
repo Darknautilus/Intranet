@@ -66,6 +66,7 @@ function getXMLHttpRequest() {
 
 /* **************************************************************************************** */
 /* Accordéon pour l'affichage du contenu des tables											*/
+/*				ATTENTION !! : fonction obsolète, voir pageCall()							*/
 /* **************************************************************************************** */
 
 function baseRequest(callback, tableName, targetFile) {
@@ -86,6 +87,22 @@ function baseRequest(callback, tableName, targetFile) {
 	xhr.send("ajax=true&table="+tableName);
 }
 
-function setAccordionBody(content, tableName) {
-	$("#"+tableName+" div").html(content);
+function setAccordionBody(content, id) {
+	$("#"+id+" .content").html(content);
+}
+
+/*
+	Change block content v2
+	
+	Utilise l'API de JQuery
+*/
+function pageCall(block, targetURL) {
+	$.ajax({
+		type:"get",
+		url:targetURL,
+		dataType:"html",
+		success:function(ret) {
+			$(block).html(ret);
+		}
+	});
 }
