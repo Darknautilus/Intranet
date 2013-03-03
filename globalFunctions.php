@@ -139,3 +139,58 @@ function sqlDatetimeToFrench($datetime, $ret = "ALL", $dateformat = "/", $timefo
     return false;
 }
 
+/*
+ * Redimensionne une image et l'exporte en jpg dans le dossier donné
+ * code initial par Florentin Le Moal, boosté par Aurélien Bertron
+ */
+function resizeImage($imgSrc, $height, $width, $dir) {
+  // Récupération des informations de l'image uploadée
+  $extension = strrchr($imgSrc, '.');
+  list($width_orig, $height_orig) = getimagesize($imgSrc);
+  // Importation de l'image uploadée pour la manipuler
+  switch ($extension) {
+    case '.jpg':
+    case '.jpeg':
+      $src_image = imagecreatefromjpeg($imgSrc);
+      break;
+  
+    case '.png':
+      $src_image = imagecreatefrompng($imgSrc);
+      break;
+  
+    case '.gif':
+      $src_image = imagecreatefromgif($imgSrc);
+      break;
+    default:
+      return false;
+      break;
+  }
+  // Taille de l'image finale et position du morceau collé
+  $dst_x = 0;
+  $dst_y = 0;
+  $dst_w = $width;
+  $dst_h = $height;
+  // Détermination de la portion d'image à récupérer
+  if ($width_orig/$height_orig < $dst_w/$dst_h) {
+    $src_w = $width_orig;
+    $src_h = $width_orig * ($dst_h/$dst_w);
+    $src_x = 0;
+    $src_y = ($height_orig/2)-($src_h/2);
+  }
+  else {
+    $src_w = $height_orig * ($dst_w/$dst_h);
+    $src_h = $height_orig;
+    $src_x = ($width_orig/2)-($src_w/2);
+    $src_y = 0;
+  }
+  // Création de l'image finale
+  $dst_image = imagecreatetruecolor($dst_w, $dst_h);
+  // Copie de la portion souhaitée
+  imagecopyresampled ($dst_image, $src_image , $dst_x , $dst_y ,$src_x , $src_y , $dst_w , $dst_h , $src_w , $src_h);
+  // Exporte l'image en jpg
+  imagejpeg($dst_image,$dir."/".$imgSrc,100);
+  // Destruction des images pour libérer de la mémoire
+  imagedestroy($dst_image);
+  imagedestroy($src_image);
+  return true;
+}
