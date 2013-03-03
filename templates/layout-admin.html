@@ -67,13 +67,21 @@
   <div class="row-fluid">
     <nav class="span2">
       <ul class="unstyled alert alert-block alert-success">
+        {% if isClient() %}
         <li><strong>{{ LOGGED_MEMBER.nomclient }}</strong></li>
         <li>{{ LOGGED_MEMBER.adrclient }}</li>
+        {% elseif isAdmin() %}
+        <li>Administrateur <strong>{{ getMembInfos().nomcompte }}</strong></li>
+        {% endif %}
       </ul>
       <ul class="nav nav-tabs nav-stacked">
+        {% if isClient() %}
         <li><a href="{{ queries('admin','anciennes_demandes',{}) }}">Voir anciennes demandes</a></li>
         <li><a href="{{ queries('biens','rechercher',{'multiple':1}) }}">Nouvelle demande</a></li>
         <li><a href="{{ queries('admin','modifier_profil',{}) }}">Editer profil</a></li>
+        {% elseif isAdmin() %}
+        <li></li>
+        {% endif %}
       </ul>
     </nav>
     <div class="span10">

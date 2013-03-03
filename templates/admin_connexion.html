@@ -22,9 +22,18 @@
 </div>
 {% endif %}
 <div class="row-fluid">
-	<div class="span4">
-		{% include 'client_form_connexion.html' %}
-	</div>
+	 {% if membtype == "client" %}
+	 {% include 'client_form_connexion.html' %}
+	 {% elseif membtype == "admin" %}
+	 {% include 'admin_form_connexion.html' %}
+	 {% else %}
+    <div class="span2 offset2">
+      <a href="{{ queries('admin','connexion',{'membtype':'client'}) }}" class="btn btn-block">Je suis déjà client</a>
+  	</div>
+  	<div class="span2 offset1">
+  	  <a href="{{ queries('admin','connexion',{'membtype':'admin'}) }}" class="btn btn-block">Je suis administrateur</a>
+  	</div>
+	 {% endif %}
 </div>
 
 {% endblock %}

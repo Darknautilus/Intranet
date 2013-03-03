@@ -6,12 +6,13 @@
 
 <div class="row-fluid">
   <div class="span4 offset3 text-center">
-    <h3 class="header-page">Bonjour {{ LOGGED_MEMBER.nomclient }} !</h1>
+    <h3 class="header-page">Bonjour {{ LOGGED_MEMBER.nomclient }}{{ getMembInfos().nomcompte }} !</h1>
     <p>Choisissez une action</p>
   </div>
 </div>
 <hr/>
 <div class="row-fluid">
+  {% if isClient() %}
   <div class="span3 offset1">
     <a href="{{ queries('admin','anciennes_demandes',{}) }}" class="btn btn-block btn-large">Anciennes demandes</a>
   </div>
@@ -21,6 +22,9 @@
   <div class="span3">
     <a href="{{ queries('admin','modifier_profil',{}) }}" class="btn btn-block btn-large">Editer profil</a>
   </div>
+  {% elseif isAdmin() %}
+  
+  {% endif %}
 </div>
 
 {% endblock %}

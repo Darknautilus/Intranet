@@ -1,0 +1,15 @@
+
+<form method="post" action="{{ queries('admin','connexion',{}) }}">
+<p>
+	<label for="numclient">Nom de compte</label>
+    <input type="text" id="nomcompte" name="nomcompte" placeholder="Nom de compte" value="adm"/>
+    <label for="email">Mot de passe</label>
+    <input type="password" id="password" name="password" placeholder="Mot de passe" value="adm"/>
+	<label class="checkbox" for="cookie">
+      <input type="checkbox" id="cookie" name="cookie" value="true" /> Se souvenir de moi
+  </label>
+	<input type="submit" class="btn btn-block" value="Valider" />
+	<input type="hidden" name="admin" value="true" /> 
+	<input type="hidden" name="filled" value="true" />
+</p>
+</form>

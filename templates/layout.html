@@ -29,6 +29,7 @@
 <body>
 
 {% include "client_form_connexion_inPopover.html" %}
+{% include "admin_form_connexion_inPopover.html" %}
 
 <header>
 	<div class="navbar navbar-fixed-top">
@@ -62,7 +63,11 @@
 				    {% if isLogged() %}
 				    <li class="dropdown">
 				      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				        {% if isClient() %}
                 {{ getMembInfos().nomclient }}
+                {% elseif isAdmin() %}
+                {{ getMembInfos().nomcompte }}
+                {% endif %}
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
@@ -71,7 +76,8 @@
               </ul>
 				   </li>
 				   {% else %}
-           <li class="hidden-phone"><a href="#" class="html-popover-trigger" html-popover-content="#formConnect" data-placement="bottom" title="Connexion à My Kiloücher">Mes demandes</a></li>
+           <li class="hidden-phone"><a href="#" class="html-popover-trigger" html-popover-content="#formConnectClient" data-placement="bottom" title="Connexion à My Kiloücher">Mes demandes</a></li>
+				   <li class="hidden-phone"><a href="#" class="html-popover-trigger" html-popover-content="#formConnectAdmin" data-placement="bottom" title="Espace administration">Espace administration</a></li>
 				   {% endif %}
 				 </ul>
 				</div>
@@ -98,7 +104,8 @@
         <li><a href="{{ queries('admin','home',{}) }}">Mon espace perso</a></li>
         <li><a href="{{ queries('admin','deconnexion',{}) }}">Déconnexion</a></li>
         {% else %}
-        <li><a href="#" class="html-popover-trigger" html-popover-content="#formConnect" data-placement="top" title="Connexion à My Kiloücher">Client déjà enregistré</a></li>
+        <li><a href="#" class="html-popover-trigger" html-popover-content="#formConnectClient" data-placement="top" title="Connexion à My Kiloücher">Client déjà enregistré</a></li>
+        <li><a href="#" class="html-popover-trigger" html-popover-content="#formConnectAdmin" data-placement="top" title="Espace administration">Espace administration</a></li>
         {% endif %}
 				<li><a href="{{ queries('base','afficher',tab) }}">Affichage base</a></li>
 				<li class="visible-phone"><a href="#" class="html-popover-trigger" html-popover-content="#confirmRAZ" data-placement="top" title="Attention !">RAZ Base !</a></li>
