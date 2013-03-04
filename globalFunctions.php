@@ -144,22 +144,25 @@ function sqlDatetimeToFrench($datetime, $ret = "ALL", $dateformat = "/", $timefo
  * code initial par Florentin Le Moal, boosté par Aurélien Bertron
  */
 function resizeImage($imgSrc, $height, $width, $dir) {
+  
+  var_dump($imgSrc);
+  
   // Récupération des informations de l'image uploadée
-  $extension = strrchr($imgSrc, '.');
-  list($width_orig, $height_orig) = getimagesize($imgSrc);
+  $extension = strrchr($imgSrc["name"], '.');
+  list($width_orig, $height_orig) = getimagesize($imgSrc["tmp_name"]);
   // Importation de l'image uploadée pour la manipuler
   switch ($extension) {
     case '.jpg':
     case '.jpeg':
-      $src_image = imagecreatefromjpeg($imgSrc);
+      $src_image = imagecreatefromjpeg($imgSrc["tmp_name"]);
       break;
   
     case '.png':
-      $src_image = imagecreatefrompng($imgSrc);
+      $src_image = imagecreatefrompng($imgSrc["tmp_name"]);
       break;
   
     case '.gif':
-      $src_image = imagecreatefromgif($imgSrc);
+      $src_image = imagecreatefromgif($imgSrc["tmp_name"]);
       break;
     default:
       return false;
@@ -188,7 +191,8 @@ function resizeImage($imgSrc, $height, $width, $dir) {
   // Copie de la portion souhaitée
   imagecopyresampled ($dst_image, $src_image , $dst_x , $dst_y ,$src_x , $src_y , $dst_w , $dst_h , $src_w , $src_h);
   // Exporte l'image en jpg
-  imagejpeg($dst_image,$dir."/".$imgSrc,100);
+  //imagejpeg($dst_image,$dir."/".$imgSrc["name"],100);
+  imagejpeg($dst_image,$dir."/"."test1.jpg",100);
   // Destruction des images pour libérer de la mémoire
   imagedestroy($dst_image);
   imagedestroy($src_image);

@@ -15,35 +15,37 @@ if(isset($_POST["filled"])) {
   if(empty($_POST["titrebien"]))
     $errors[] = "Veuillez entrer un titre";
   else
-    $values = $_POST["titrebien"];
+    $values["titrebien"] = $_POST["titrebien"];
   if(empty($_POST["detailbien"]))
     $errors[] = "Veuillez entrer des détails pour ce bien";
   else
-    $values = $_POST["detailbien"];
+    $values["detailbien"] = $_POST["detailbien"];
   if(empty($_POST["adrbien"]))
     $errors[] = "Veuillez entrer un adresse";
   else
-    $values = $_POST["adrbien"];
+    $values["adrbien"] = $_POST["adrbien"];
   if(empty($_POST["prixbien"]))
     $errors[] = "Veuillez entrer un prix";
   else
-    $values = $_POST["prixbien"];
+    $values["prixbien"] = $_POST["prixbien"];
   if(empty($_POST["idtype"]))
     $errors[] = "Veuillez sélectionner une catégorie";
   else
-    $values = $_POST["idtype"];
+    $values["idtype"] = $_POST["idtype"];
   if(!isset($_FILES['photoBien']))
     $errors[] = "Veuillez sélectionner une image";
   
   if(empty($errors)) {
     
+    //var_dump($_FILES["photoBien"]);
+    
     // Récupération du fichier
     $dossier = images();
-    $fichier = basename($_FILES['photoBien']['name']);
+    $fichier = basename($_FILES["photoBien"]["name"]);
     $taille_maxi = 500000;
-    $taille = filesize($_FILES['photoBien']['tmp_name']);
-    $extensions = array('.png', '.gif', '.jpg', '.jpeg');
-    $extension = strrchr($_FILES['photoBien']['name'], '.');
+    $taille = filesize($_FILES["photoBien"]["tmp_name"]);
+    $extensions = array(".png", ".gif", ".jpg", ".jpeg");
+    $extension = strrchr($_FILES["photoBien"]["name"], ".");
     //Début des vérifications de sécurité...
     if(!in_array($extension, $extensions)) //Si l'extension est incorrecte
     {
@@ -53,14 +55,14 @@ if(isset($_POST["filled"])) {
     {
       $errors[] = 'Taille de fichier supérieure à 500ko';
     }
-    if(!isset($errors))
+    if(empty($errors))
     {
       if(!resizeImage($_FILES["photoBien"], 153, 204, images())) {
         $errors[] = "Echec de l'upload !";
       }
       else {
         // Renommage du fichier
-        rename(images()."/".$_FILES["photoBien"]["name"], images()."/"."test");
+        rename(images()."/".$_FILES["photoBien"]["name"], images()."/"."test.jpg");
         $success[] = "Image sauvegardée";
         // Ajout dans la base
       }
