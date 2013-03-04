@@ -197,6 +197,8 @@ function insert ($table, $valeurs) {
 	$sql .= ') VALUES (' ;
 	$sql .= join(', ', $valeurs_) ;
 	$sql .= ');' ;
+	
+	//var_dump($sql);
  
 	try {
 		$lines = $this->bdd->exec($sql);

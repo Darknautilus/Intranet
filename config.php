@@ -19,5 +19,6 @@ define("PATH_ROOT", dirname(__FILE__));
 define("PATH_MODULES", PATH_ROOT."/modules");
 define("PATH_MODELES", PATH_ROOT."/modeles");
 define("PATH_TEMPLATES", PATH_ROOT."/templates");
+define("PATH_IMAGES", PATH_TEMPLATES."/style/images");
 
 include(PATH_MODELES."/anti-spam.class.php");

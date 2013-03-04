@@ -24,8 +24,8 @@ if(isset($_POST["filled"])) {
     $errors[] = "Veuillez entrer un adresse";
   else
     $values["adrbien"] = $_POST["adrbien"];
-  if(empty($_POST["prixbien"]))
-    $errors[] = "Veuillez entrer un prix";
+  if(empty($_POST["prixbien"]) || $_POST["prixbien"] <= 0)
+    $errors[] = "Veuillez entrer un prix positif";
   else
     $values["prixbien"] = $_POST["prixbien"];
   if(empty($_POST["idtype"]))
@@ -57,14 +57,22 @@ if(isset($_POST["filled"])) {
     }
     if(empty($errors))
     {
-      if(!resizeImage($_FILES["photoBien"], 153, 204, images())) {
+      $idbien = $bdd->select("select max(idbien) as mid from bien;");
+      $idbien = "b" . str_pad((intval(substr($idbien[0]["mid"], 1)) + 1), 4, '0', STR_PAD_LEFT);
+      if(!resizeImage($_FILES["photoBien"], 153, 204, PATH_IMAGES, $idbien)) {
         $errors[] = "Echec de l'upload !";
       }
       else {
-        // Renommage du fichier
-        rename(images()."/".$_FILES["photoBien"]["name"], images()."/"."test.jpg");
         $success[] = "Image sauvegardée";
         // Ajout dans la base
+        if(!$bdd->insert("bien", array("idbien" => $idbien, "titrebien" => $values["titrebien"], "detailbien" => $values["detailbien"], "adrbien" => $values["adrbien"], "prixbien" => intval($values["prixbien"]), "idtype" => $values["idtype"], "photoBien" => $idbien.".jpg"))) {
+          unlink(PATH_IMAGES."/".$idbien.".jpg");
+          $errors[] = "Erreur insertion, image supprimée";
+        }
+        else {
+          $success[] = "Bien enregistré";
+          $values = array();
+        }
       }
     }
     
