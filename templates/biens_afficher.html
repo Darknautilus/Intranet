@@ -1,8 +1,48 @@
-{% extends 'layout.html' %}
+{% extends isLogged() ? 'layout-admin.html' : 'layout.html' %}
 
 {% block title %}Liste de biens{% endblock %}
 
 {% block content %}
+
+{% if isLogged() and isAdmin() %}
+
+<h3 class="page-header">Gestion des biens</h3>
+
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Titre</th>
+    <th>Adresse</th>
+    <th>Détails</th>
+    <th>Type</th>
+    <th>Prix</th>
+    <th></th>
+  </tr>
+  {% for bien in biens %}
+  <tr class="editable-row" action="#">
+    <div id="typeEditor" class="cell-editor">
+      <select name="nomtype" class="span12">
+        {% for type in types %}
+          <option value="{{ type.idtype }}" {% if type.idtype == bien.idtype %}selected="selected"{% endif %}>{{ type.nomtype }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <td class="editable-cell" name="titrebien">{{ bien.titrebien }}</td>
+    <td class="editable-cell" name="adrbien">{{ bien.adrbien }}</td>
+    <td class="editable-cell" name="detailbien" value="{{ bien.detailbien }}">{{ bien.detailbien | cut(40) }}</td>
+    <td class="editable-cell" cell-editor="#typeEditor">{{ bien.nomtype }}</td>
+    <td class="editable-cell" name="prixbien">{{ bien.prixbien }}</td>
+    <td class="actions-cell">
+      <button class="btn edition-out edition-trigger" title="Modifier ce bien"><i class="icon-edit"></i></button>
+      <div class="btn-group edition-in">
+        <button class="btn btn-success action-valid" type="submit"><i class="icon-ok-sign"></i></button>
+        <button class="btn btn-danger action-cancel"><i class="icon-remove-sign"></i></button>
+      </div>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% else %}
 
 <h2>Affichage de biens</h2>
 
@@ -13,5 +53,7 @@
 	<li><a href="{{ queries('biens','afficher_cat',tab) }}">Par catégorie</a></li>
 	<li><a href="{{ queries('biens','rechercher', tab) }}">Par mots-clé</a></li>
 </ul>
+
+{% endif %}
 
 {% endblock %}

@@ -206,3 +206,63 @@ function setValidMarkup(valid,controlGroup) {
 	}
 	updateFormMarkup($(controlGroup));
 }
+
+
+
+/*
+  Pour la modification des biens
+  
+  Pour les values : si le texte affiché dans une cellule est différent du texte qu'on veut modifier (e.g. texte tronqué), spécifier dans le html l'attribut value avec la vraie valeur de la cellule.
+*/
+$(document).ready(function() {
+	$(".editable-row .edition-in").css("display","none");
+	$(".cell-editor").css("display","none");
+});
+$(".editable-row .edition-trigger").click(function() {
+	// La ligne éditable
+	var line = $(this).parents("tr");
+	// La cellule contenant les boutons d'action
+	var actionscell = line.children(".actions-cell");
+	// On met les boutons en mode édition
+	actionscell.find(".edition-out").css("display","none");
+	actionscell.find(".edition-in").css("display","block");
+	
+	// On met la ligne en surbrillance
+	line.addClass("info");
+	
+	// On parcourt chaque cellule à éditer
+	line.find(".editable-cell").each(function() {
+		var cell = $(this);
+		// On sauvegarde la valeur du champ dans un attribut
+		cell.attr("init-value",cell.html());
+		if(cell.attr("value") == undefined) {
+			cell.attr("value",cell.html());
+		}
+		// On transforme la cellule avec un input ou le cell-editor spécifié
+		if(cell.attr("cell-editor") != undefined) {
+			cell.html($(cell.attr("cell-editor")).html());
+		}
+		else {
+			cell.html("<input type=\"text\" name=\""+cell.attr("name")+"\" class=\"span12\" value=\""+cell.attr("value")+"\" />");
+		}
+	});
+	
+	// Si on clique sur le bouton annuler
+	actionscell.find(".action-cancel").click(function() {
+		// On remet toutes les cases dans l'état initial
+		line.find(".editable-cell").each(function() {
+			$(this).html($(this).attr("init-value"));
+		});
+		// On met les boutons en mode non-edition
+		actionscell.find(".edition-in").css("display","none");
+		actionscell.find(".edition-out").css("display","block");
+		// On enlève la surbrillance
+		line.removeClass("info");
+	});
+	
+	// Si on clique sur le bouton valider
+	actionscell.find(".action-valid").click(function() {
+		
+	});
+	
+});

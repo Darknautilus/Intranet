@@ -81,6 +81,7 @@
         <li><a href="{{ queries('admin','modifier_profil',{}) }}">Editer profil</a></li>
         {% elseif isAdmin() %}
         <li><a href="{{ queries('biens','ajouter',{}) }}">Ajouter un bien</a></li>
+        <li><a href="{{ queries('biens','afficher',{}) }}">Modifier un bien</a></li>
         {% endif %}
       </ul>
     </nav>

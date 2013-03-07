@@ -1,6 +1,6 @@
 <?php
 
-if(!isLogged())
+if(!isLogged() || !isAdmin())
   header("Location:".queries("","",array()));
 
 $bdd = new BDD();
