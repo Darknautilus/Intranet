@@ -247,6 +247,13 @@ $(".editable-row .edition-trigger").click(function() {
 			cell.html("<input type=\"text\" name=\""+cell.attr("name")+"\" class=\"span12\" value=\""+cell.attr("value")+"\" />");
 		}
 	});
+	
+	line.keypress(function(e) {
+		if(e.keyCode == 13) {
+			onValid(line.children("actions-cell").children("action-valid"));
+		}
+	});
+	
 });
 
 function onValid(button) {
@@ -316,8 +323,8 @@ function onValid(button) {
 
 
 // Si on clique sur le bouton valider
-$(".action-valid").click(function() {
-	
+$(".action-valid").click(function () {
+	onValid($(this));
 });
 
 // Si on clique sur le bouton annuler
