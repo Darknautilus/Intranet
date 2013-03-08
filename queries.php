@@ -33,7 +33,8 @@ $MODULES = array(
 		"afficher_cat",
 		"afficher_detail",
 		"rechercher",
-	  "ajouter"
+	  "ajouter",
+	  "modifier"
 		),
 	"visites" => array(
 		"saisir",

@@ -217,6 +217,7 @@ function setValidMarkup(valid,controlGroup) {
 $(document).ready(function() {
 	$(".editable-row .edition-in").css("display","none");
 	$(".cell-editor").css("display","none");
+	$(".editable-cell.hidden").css("display","none");
 });
 $(".editable-row .edition-trigger").click(function() {
 	// La ligne éditable
@@ -246,23 +247,98 @@ $(".editable-row .edition-trigger").click(function() {
 			cell.html("<input type=\"text\" name=\""+cell.attr("name")+"\" class=\"span12\" value=\""+cell.attr("value")+"\" />");
 		}
 	});
+});
+
+function onValid(button) {
+	var line = button.parents("tr");
+	var actionscell = line.children(".actions-cell");
 	
-	// Si on clique sur le bouton annuler
-	actionscell.find(".action-cancel").click(function() {
-		// On remet toutes les cases dans l'état initial
-		line.find(".editable-cell").each(function() {
-			$(this).html($(this).attr("init-value"));
-		});
-		// On met les boutons en mode non-edition
-		actionscell.find(".edition-in").css("display","none");
-		actionscell.find(".edition-out").css("display","block");
-		// On enlève la surbrillance
-		line.removeClass("info");
+	// On supprime le message d'erreur éventuel (.error-line suivant la ligne actuelle)
+	line.find("+ .error-line").remove();
+	
+	var strData = "";
+	line.find(".editable-cell").each(function() {
+		strData += $(this).attr("name") + "=" + $(this).children(":first").attr("value") + "&";
 	});
-	
-	// Si on clique sur le bouton valider
-	actionscell.find(".action-valid").click(function() {
-		
+	strData += "ajax=true";
+	$.ajax({
+		type: "post",
+		url: line.attr("action"),
+		data: strData,
+		dataType: "json",
+		success : function(data) {
+			if(data.result) {
+				line.find(".editable-cell").each(function() {
+					
+					$(this).html(data.values[$(this).attr("name")]);
+					$(this).attr("value",data.values[$(this).attr("name")]);
+					$(this).attr("init-value",data.values[$(this).attr("name")]);
+					
+					// cas spécial pour la catégorie
+					if($(this).attr("name") == "idtype") {
+						$(this).html(data.values.nomtype);
+						$($(this).attr("cell-editor")).children("select").children("option").each(function() {
+							if($(this).attr("value") == data.values.idtype) {
+								$(this).attr("selected","selected");
+							}
+							else {
+								$(this).removeAttr("selected");
+							}
+						});
+					}
+					
+					line.removeClass("info");
+					line.removeClass("error");
+					// On met les boutons en mode non-edition
+					actionscell.find(".edition-in").css("display","none");
+					actionscell.find(".edition-out").css("display","block");
+					// On supprime le message d'erreur éventuel
+					line.find("+ .error-line").remove();
+					
+				});
+			}
+			else {
+				// On marque l'erreur avec un fond rouge
+				line.removeClass("info");
+				line.addClass("error");
+				var errors = "<tr class=\"error error-line\"><td colspan=\"6\" style=\"text-align:center;\"><ul class=\"unstyled\">";
+				$.each(data.errors, function(index, value) {
+					errors += "<li>- "+value+"</li>";
+				});
+				errors += "</ul></td></tr>";
+				line.after(errors);
+			}
+		}
 	});
+	return false;
 	
+}
+
+
+// Si on clique sur le bouton valider
+$(".action-valid").click(function() {
+	
+});
+
+// Si on clique sur le bouton annuler
+$(".action-cancel").click(function() {
+	
+	var line = $(this).parents("tr");
+	var actionscell = line.children(".actions-cell");
+	
+	// On remet toutes les cases dans l'état initial
+	line.find(".editable-cell").each(function() {
+		$(this).html($(this).attr("init-value"));
+	});
+	// On met les boutons en mode non-edition
+	actionscell.find(".edition-in").css("display","none");
+	actionscell.find(".edition-out").css("display","block");
+	// On enlève la surbrillance
+	line.removeClass("info");
+	line.removeClass("error");
+	
+	// On supprime le message d'erreur éventuel
+	line.find("+ .error-line").remove();
+	
+	return false;
 });

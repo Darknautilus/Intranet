@@ -18,24 +18,25 @@
     <th></th>
   </tr>
   {% for bien in biens %}
-  <tr class="editable-row" action="#">
-    <div id="typeEditor" class="cell-editor">
-      <select name="nomtype" class="span12">
+  <tr class="editable-row" action="{{ queries('biens','modifier',{}) }}">
+    <div id="typeEditor{{ bien.idbien }}" class="cell-editor">
+      <select class="span12">
         {% for type in types %}
           <option value="{{ type.idtype }}" {% if type.idtype == bien.idtype %}selected="selected"{% endif %}>{{ type.nomtype }}</option>
         {% endfor %}
       </select>
     </div>
+    <td class="editable-cell hidden" name="idbien">{{ bien.idbien }}</td>
     <td class="editable-cell" name="titrebien">{{ bien.titrebien }}</td>
     <td class="editable-cell" name="adrbien">{{ bien.adrbien }}</td>
     <td class="editable-cell" name="detailbien" value="{{ bien.detailbien }}">{{ bien.detailbien | cut(40) }}</td>
-    <td class="editable-cell" cell-editor="#typeEditor">{{ bien.nomtype }}</td>
+    <td class="editable-cell" name="idtype" cell-editor="#typeEditor{{ bien.idbien }}">{{ bien.nomtype }}</td>
     <td class="editable-cell" name="prixbien">{{ bien.prixbien }}</td>
     <td class="actions-cell">
       <button class="btn edition-out edition-trigger" title="Modifier ce bien"><i class="icon-edit"></i></button>
       <div class="btn-group edition-in">
-        <button class="btn btn-success action-valid" type="submit"><i class="icon-ok-sign"></i></button>
-        <button class="btn btn-danger action-cancel"><i class="icon-remove-sign"></i></button>
+        <button class="btn btn-success action-valid" title="Valider"><i class="icon-ok-sign"></i></button>
+        <button class="btn btn-danger action-cancel" title="Annuler"><i class="icon-remove-sign"></i></button>
       </div>
     </td>
   </tr>
