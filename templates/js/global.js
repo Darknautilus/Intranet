@@ -247,7 +247,6 @@ $(".editable-row .edition-trigger").click(function() {
 			cell.html("<input type=\"text\" name=\""+cell.attr("name")+"\" class=\"span12\" value=\""+cell.attr("value")+"\" />");
 		}
 	});
-	
 	line.keypress(function(e) {
 		if(e.keyCode == 13) {
 			onValid(line.children("actions-cell").children("action-valid"));
@@ -255,7 +254,6 @@ $(".editable-row .edition-trigger").click(function() {
 	});
 	
 });
-
 function onValid(button) {
 	var line = button.parents("tr");
 	var actionscell = line.children(".actions-cell");
@@ -320,13 +318,10 @@ function onValid(button) {
 	return false;
 	
 }
-
-
 // Si on clique sur le bouton valider
 $(".action-valid").click(function () {
 	onValid($(this));
 });
-
 // Si on clique sur le bouton annuler
 $(".action-cancel").click(function() {
 	
@@ -348,4 +343,44 @@ $(".action-cancel").click(function() {
 	line.find("+ .error-line").remove();
 	
 	return false;
+});
+
+
+
+
+/*
+	Pour la suppression de bien
+*/
+$(document).ready(function() {
+	$(".bien-deleter").click(function() {
+		var a = $(this);
+		var line = a.parents("tr");
+		
+		var choix = confirm("Etes-vous sûr de vouloir supprimer ce bien ?");
+		
+		if(choix) {
+			$.ajax({
+				type: "post",
+				url: a.attr("href"),
+				data: "ajax=true",
+				dataType: "json",
+				success: function(data) {
+					if(data.result) {
+						line.remove();
+					}
+					else {
+						// On marque l'erreur avec un fond rouge
+						line.addClass("error");
+						var errors = "<tr class=\"error error-line\"><td colspan=\"6\" style=\"text-align:center;\"><ul class=\"unstyled\">";
+						$.each(data.errors, function(index, value) {
+							errors += "<li>- "+value+"</li>";
+						});
+						errors += "</ul></td></tr>";
+						line.after(errors);
+					}
+				}
+			});
+		}
+		return false;
+	});
 });

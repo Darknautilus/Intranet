@@ -34,7 +34,8 @@ $MODULES = array(
 		"afficher_detail",
 		"rechercher",
 	  "ajouter",
-	  "modifier"
+	  "modifier",
+	  "supprimer"
 		),
 	"visites" => array(
 		"saisir",

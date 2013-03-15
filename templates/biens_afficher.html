@@ -33,7 +33,10 @@
     <td class="editable-cell" name="idtype" cell-editor="#typeEditor{{ bien.idbien }}">{{ bien.nomtype }}</td>
     <td class="editable-cell" name="prixbien">{{ bien.prixbien }}</td>
     <td class="actions-cell">
-      <button class="btn edition-out edition-trigger" title="Modifier ce bien"><i class="icon-edit"></i></button>
+      <div class="btn-group edition-out">
+        <button class="btn btn-info edition-trigger" title="Modifier ce bien"><i class="icon-edit"></i></button>
+        <a class="btn btn-danger bien-deleter" href="{{ queries('biens','supprimer',{'idbien':bien.idbien}) }}"><i class="icon-trash"></i></a>
+      </div>
       <div class="btn-group edition-in">
         <button class="btn btn-success action-valid" title="Valider"><i class="icon-ok-sign"></i></button>
         <button class="btn btn-danger action-cancel" title="Annuler"><i class="icon-remove-sign"></i></button>
