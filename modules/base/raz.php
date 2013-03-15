@@ -5,6 +5,17 @@ $errors[] = array();
 $bdd = new BDD();
 $bdd->select("COMMIT;");
 
+// Récupération des photos des biens
+$dossierBak = PATH_IMAGES."/photosBien.bak";
+if($dossierBak = opendir($dossierBak)) {
+  while($photo = readdir($dossierBak)) {
+    if($photo != "." && $photo != "..") {
+      copy(PATH_IMAGES."/photosBien.bak/".$photo, PATH_IMAGES."/".$photo);
+    }
+  }
+  closedir($dossierBak);
+}
+
 $fichier = file_get_contents(root()."/docs/RazBase.sql"); // on charge le fichier SQL
 // foreach($sql as $l){ // on le lit
 // 	if (substr(trim($l),0,2)!="--"){ // suppression des commentaires

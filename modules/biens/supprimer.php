@@ -7,26 +7,49 @@ if(isLogged() && isAdmin()) {
   else {
     $errors = array();
     $bdd = new BDD();
-    $idbien = $bdd->select("select idbien from bien where idbien='".$_GET["idbien"]."';");
-    if(!$idbien) {
+    $bien = $bdd->select("select idbien, photoBien from bien where idbien='".$_GET["idbien"]."';");
+    if(!$bien) {
       $errors[] = "Le bien spécifié est inconnu";
+    }
+    else {
+      $bien = $bien[0];
     }
     
     if(empty($errors)) {
-      $result = $bdd->delete("bien", array("idbien" => $idbien[0]["idbien"]));
+      
+      $req = array();
+      
+      $result = $bdd->delete("ressembler", array("idbien1" => $bien["idbien"], "idbien2" => $bien["idbien"]));
+      if(!$result) {
+        $errors[] = "Erreur suppression ressemblance";
+      }
+      $req[] = $bdd->getLastReq();
+      $result = $bdd->delete("visiter", array("idbien" => $bien["idbien"]));
+      if(!$result) {
+        $errors[] = "Erreur suppression visite";
+      }
+      $req[] = $bdd->getLastReq();
+      $result = $bdd->delete("bien", array("idbien" => $bien["idbien"]));
       if(!$result) {
         $errors[] = "Erreur suppression bien";
       }
-      $bdd->close();
+      $req[] = $bdd->getLastReq();
+      
+      // Suppression de la photo
+      $result = unlink(PATH_IMAGES."/".$bien["photoBien"]);
+      if(!$result) {
+        $errors[] = "Erreur suppression image";
+      }
       if(empty($errors)) {
-        echo json_encode(array("result" => true, "idbien" => $idbien[0]["idbien"]));
+        echo json_encode(array("result" => true, "idbien" => $bien["idbien"]));
       }
       else {
-        echo json_encode(array("result" => false, "errors" => $errors, "idbien" => $_GET["idbien"]));
+        echo json_encode(array("result" => false, "errors" => $errors));
       }
     }
     else {
-      echo json_encode(array("result" => false, "errors" => $errors, "idbien" => $_GET["idbien"]));
+      echo json_encode(array("result" => false, "errors" => $errors));
     }
+    $bdd->close();
   }
 }
