@@ -17,27 +17,18 @@ if(isLogged() && isAdmin()) {
     
     if(empty($errors)) {
       
-      $req = array();
-      
-      $result = $bdd->delete("ressembler", array("idbien1" => $bien["idbien"], "idbien2" => $bien["idbien"]));
-      if(!$result) {
+      if(!$bdd->delete("ressembler", array("idbien1" => $bien["idbien"], "idbien2" => $bien["idbien"]))) {
         $errors[] = "Erreur suppression ressemblance";
       }
-      $req[] = $bdd->getLastReq();
-      $result = $bdd->delete("visiter", array("idbien" => $bien["idbien"]));
-      if(!$result) {
+      if(!$bdd->delete("visiter", array("idbien" => $bien["idbien"]))) {
         $errors[] = "Erreur suppression visite";
       }
-      $req[] = $bdd->getLastReq();
-      $result = $bdd->delete("bien", array("idbien" => $bien["idbien"]));
-      if(!$result) {
+      if(!$bdd->delete("bien", array("idbien" => $bien["idbien"]))) {
         $errors[] = "Erreur suppression bien";
       }
-      $req[] = $bdd->getLastReq();
       
       // Suppression de la photo
-      $result = unlink(PATH_IMAGES."/".$bien["photoBien"]);
-      if(!$result) {
+      if(!unlink(PATH_IMAGES."/".$bien["photoBien"])) {
         $errors[] = "Erreur suppression image";
       }
       if(empty($errors)) {

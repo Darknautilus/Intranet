@@ -37,8 +37,6 @@ if(isset($_POST["filled"])) {
   
   if(empty($errors)) {
     
-    //var_dump($_FILES["photoBien"]);
-    
     // Récupération du fichier
     $dossier = images();
     $fichier = basename($_FILES["photoBien"]["name"]);
@@ -58,6 +56,7 @@ if(isset($_POST["filled"])) {
     if(empty($errors))
     {
       $idbien = $bdd->select("select max(idbien) as mid from bien;");
+      // Construction du nom du fichier
       $idbien = "b" . str_pad((intval(substr($idbien[0]["mid"], 1)) + 1), 4, '0', STR_PAD_LEFT);
       if(!resizeImage($_FILES["photoBien"], 153, 204, PATH_IMAGES, $idbien)) {
         $errors[] = "Echec de l'upload !";
