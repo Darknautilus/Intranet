@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block title %}Montant des biens{% endblock %}
+
+{% block content %}
+
+<h3 class="page-header">Montant des biens</h3>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a class="unstyled" href="#montant" data-toggle="tab">Montant des biens à la vente</a></li>
+  <li><a class="unstyled" href="#montantCat" data-toggle="tab">Montant des biens à la vente (par catégorie)</a></li>
+  <li><a class="unstyled" href="#affDetails" data-toggle="tab">Détails d'un bien</a></li>
+</ul>
+<div class="tab-content" id="stats_montantBiens" target-url="{{ queries('stats','total_ventes',{}) }}">
+  <div class="tab-pane active" id="montant">
+    <ul>
+      <li>Montant total des biens à la vente : <span id="stats_montantTotal"></span>
+      <li>Montant des commissions : <span id="stats_montantComm"></span>
+    </ul>
+    <button class="span2 offset4 btn btn-info refresh" title="Actualiser"><i class="icon-repeat"></i> Actualiser</button>
+  </div>
+  <div class="tab-pane" id="montantCat">
+    <div class="row-fluid">
+      <div class="span3">
+        <select name="typebien" onchange="stats_launch();">
+          {% for type in types %}
+          <option value="{{ type.idtype }}"{% if loop.first %} selected="selected"{% endif %}>{{ type.nomtype }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="span7">
+        <ul>
+          <li>Montant total des biens à la vente : <span id="stats_montantTotal"></span>
+          <li>Montant des commissions : <span id="stats_montantComm"></span>
+        </ul>
+        <button class="span3 offset2 btn btn-info refresh" title="Actualiser"><i class="icon-repeat"></i> Actualiser</button>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane" id="affDetails">
+    <div class="row-fluid">
+      <div class="span3 offset1">
+        <label for="idbien">Numéro du bien :</label>
+        <input type="text" class="span4" id="idbien" name="idbien" value="b0001" onblur="stats_launch();"/>
+        <div id="errorBien">
+        </div>
+      </div>
+      <div id="caracBien" class="span6">
+        <ul>
+          <li>Titre : <span id="titrebien"></span></li>
+          <li>Détails : <span id="description"></span></li>
+          <li>Adresse : <span id="adrbien"></span></li>
+          <li>Type : <span id="typebien"></span></li>
+        </ul>
+        <div id="detailbien">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -384,3 +384,76 @@ $(document).ready(function() {
 		return false;
 	});
 });
+
+
+/*
+ * Calcul du montant des biens
+ */
+$(document).ready(function() {
+	stats_launch();
+});
+$("#stats_montantBiens .refresh").click(function() {
+	stats_launch();
+});
+function stats_launch() {
+	$("#stats_montantBiens .tab-pane").each(function() {
+		var tab = $(this);
+		var url = tab.parents("#stats_montantBiens").attr("target-url");
+		var data = "ajax=true";
+		if(tab.attr("id") == "montant") {
+			data += "&section=montant";
+			$.ajax({
+				type: "post",
+				url: url,
+				data: data,
+				dataType: "json",
+				success: function(data) {
+					tab.find("#stats_montantTotal").html(data.montantTotal+" €");
+					tab.find("#stats_montantComm").html(data.montantCom+" €");
+				}
+			});
+		}
+		else if(tab.attr("id") == "montantCat") {
+			var select  = tab.find("select");
+			data += "&section=montantCat&type="+select.val();
+			$.ajax({
+				type: "post",
+				url: url,
+				data: data,
+				dataType: "json",
+				success: function(data) {
+					tab.find("#stats_montantTotal").html(data.montantTotal+" €");
+					tab.find("#stats_montantComm").html(data.montantCom+" €");
+				}
+			});
+		}
+		else if(tab.attr("id") == "affDetails") {
+			var input = tab.find("#idbien");
+			data += "&section=affDetails&idbien="+input.val();
+			$.ajax({
+				type: "post",
+				url: url,
+				data: data,
+				dataType: "json",
+				success: function(data) {
+					if(data.result) {
+						tab.find("#errorBien").html("");
+						tab.find("#titrebien").html(data.bien.titrebien);
+						tab.find("#description").html(data.bien.detailbien);
+						tab.find("#adrbien").html(data.bien.adrbien);
+						tab.find("#typebien").html(data.bien.nomtype);
+						tab.find("#detailbien").html("<a class=\"btn btn-block btn-info\" href=\""+data.urlDetails+"\">Plus de détails</a>");
+					}
+					else {
+						tab.find("#titrebien").html("");
+						tab.find("#detailbien").html("");
+						tab.find("#description").html("");
+						tab.find("#adrbien").html("");
+						tab.find("#typebien").html("");
+						tab.find("#errorBien").html("<p><em>Aucun bien trouvé</em></p>");
+					}
+				}
+			});
+		}
+	});
+}
