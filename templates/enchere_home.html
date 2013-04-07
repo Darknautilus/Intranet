@@ -40,10 +40,10 @@
     <p><em>Il n'y a aucun bien mis aux enchères</em></p>
     {% endif %}
   </div>
-  <div class="span4">
+  <div class="span4 offset1">
     <h4>Surenchères</h4>
-    
-    <a class="btn btn-danger" href="{{ queries('base','raz',{}) }}">RAZ Base !</a>
+    <a class="btn btn-block btn-info" href="{{ queries('base','afficher',{}) }}">Afficher la base</a>
+    <a class="btn btn-block btn-danger" href="{{ queries('base','raz',{}) }}">RAZ Base !</a>
   </div>
 </div>
 {% endblock %}
