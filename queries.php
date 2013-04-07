@@ -61,7 +61,9 @@ $MODULES = array(
     "total_ventes"
     ),
   "enchere" => array(
-    "home"
+    "home",
+    "rencherir",
+    "getStatsSurenchere"
     )
 	);
 

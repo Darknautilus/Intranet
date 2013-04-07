@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %}Renchérir sur un bien{% endblock %}
+
+{% block content %}
+
+<div class="row-fluid">
+  <a class="btn" href="{{ queries('enchere','home',{}) }}"><i class="icon-arrow-left"></i> retour</a>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    <h3 class="page-header">Fiche du bien</h3>
+    <div class="row-fluid">
+	    <div class="span6">
+		    <h4>{{ bien.titrebien }} <small>{{ bien.nomtype }}</small></h4>
+		    <p class="well">
+		     {{ bien.detailbien }}
+		    </p>
+	    </div>
+      <img class="span6" alt="Photo de {{ bien.titrebien }}" src="{{ images() }}/{{ bien.photoBien }}" />
+    </div>
+    <hr/>
+    <div class="row-fluid">
+	    <table class="table table-bordered">
+	      <tr>
+	        <th>Prix de vente</th>
+	        <th>Prix de départ</th>
+	      </tr>
+	      <tr>
+	        <td>{{ bien.prixbien }} €</td>
+	        <td>{{ enchere.prixdepart }} €</td>
+	      </tr>
+	    </table>
+    </div>
+  </div>
+  <div class="span6">
+    <h3 class="page-header">Enchère</h3>
+    <span id="urlStats" class="hidden" target-url="{{ queries('enchere','getStatsSurenchere',{'idbien':bien.idbien}) }}"></span>
+    <div class="well">
+      <h4>Montant maximal courant</h4>
+      <span id="montantMax"></span>
+      <h4>Nombre d'intéressés</h4>
+      <span id="nbcli"></span>
+      <h4>Temps restant</h4>
+      <span class="kontarebour"></span>
+    </div>
+    <div class="well">
+      {% if errors is not empty %}
+      <div class="alert alert-block alert-danger">
+        <h4>Erreur</h4>
+        <ul class="unstyled">
+          {% for error in errors %}
+          <li>- {{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      <form method="post" action="{{ queries('enchere','rencherir',{'idbien':bien.idbien}) }}">
+        <label for="idclient">Id client</label>
+        <input type="text" id="idclient" name="idclient" />
+        <label for="enchere">Enchère</label>
+        <input type="text" id="enchere" name="enchere" /><br/>
+        <input class="btn" type="submit" value="Envoyer" />
+        <input type="hidden" name="filled" value="true" />
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

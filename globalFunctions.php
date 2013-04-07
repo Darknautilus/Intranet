@@ -194,3 +194,28 @@ function resizeImage($imgSrc, $height, $width, $dir, $name) {
   imagedestroy($src_image);
   return true;
 }
+
+
+
+// Récupère le nombre de clients ayant surenchéri sur un bien donné, et l'enchère maximale
+function getSurenchere($idbien) {
+  $bdd = new BDD();
+  $enchere = $bdd->select("select prixdepart from enchere where idbien = '".$idbien."';");
+  $surencheres = $bdd->select("select idclient, montant from surencherir where idbien = '".$idbien."';");
+  $nbCli = 0;
+  $montantMax = $enchere[0]["prixdepart"];
+  if($surencheres) {
+    // Récupère le montant maximum et la liste des clients intéressés
+    $clients = array();
+    foreach($surencheres as $surenchere) {
+      if(!in_array($surenchere["idclient"],$clients)) {
+        $clients[] = $surenchere["idclient"];
+        $nbCli++;
+      }
+      if($surenchere["montant"] > $montantMax)
+        $montantMax = $surenchere["montant"];
+    }
+  }
+  $bdd->close();
+  return array("nbCli" => $nbCli, "montantMax" => $montantMax);
+}

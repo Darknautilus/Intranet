@@ -457,3 +457,26 @@ function stats_launch() {
 		}
 	});
 }
+
+/*
+ * Récupération du nombre de client et du montant max des surenchères pour un bien donné
+ */
+$(document).ready(function() {
+	var url = $("#urlStats").attr("target-url");
+	if(url) {
+		getStatsSurenchere(url);
+		window.setInterval(function() {getStatsSurenchere(url);}, 10000, url);
+	}
+});
+function getStatsSurenchere(url) {
+	$.ajax({
+		type: "post",
+		url: url,
+		data: "ajax=true",
+		dataType: "json",
+		success: function(data) {
+			$("#montantMax").html(data.montantmax+" €");
+			$("#nbcli").html(data.nbcli+" internautes");
+		}
+	});
+}
