@@ -16,7 +16,7 @@ if($dossierBak = opendir($dossierBak)) {
   closedir($dossierBak);
 }
 
-$fichier = file_get_contents(root()."/docs/RazBase.sql"); // on charge le fichier SQL
+$fichier = file_get_contents(root()."/docs/RazBaseComp.sql"); // on charge le fichier SQL
 // foreach($sql as $l){ // on le lit
 // 	if (substr(trim($l),0,2)!="--"){ // suppression des commentaires
 // 		$requetes .= $l;
