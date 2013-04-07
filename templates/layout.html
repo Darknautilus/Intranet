@@ -92,7 +92,7 @@
   <div id="notifications">
   </div>
 	<div class="row-fluid">
-		<nav class="span2">
+		<nav class="span3">
 			<ul class="well nav nav-list text-center">
 				{% set tab = {} %}
 				<li class="nav-header">Consultation</li>
@@ -103,6 +103,7 @@
 				<li><a href="{{ queries('biens','rechercher',{'multiple':1}) }}">Recherche de plusieurs biens à visiter (client nouveau)</a></li>
 				<li class="nav-header">AJAX</li>
 				<li><a href="{{ queries('stats','total_ventes',{}) }}">Montant des biens à la vente</a></li>
+				<li><a href="{{ queries('enchere','home',{}) }}">Biens aux enchères</a></li>
 				<li class="nav-header">Espace client & administration</li>
 				<li><a href="{{ queries('visites','afficher_panier',{}) }}">Voir les visites</a></li>
 				{% if isLogged() %}
@@ -124,7 +125,7 @@
 				</div>
 			</div>
 		</nav>
-		<div class="span10">
+		<div class="span9">
 		{% block content %}
 		{% endblock %}
 		</div>

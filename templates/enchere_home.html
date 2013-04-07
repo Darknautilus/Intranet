@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% block title %}Enchères{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+  <h3 class="page-header">Enchères</h3>
+  <div class="span6">
+    <h4>Biens disponibles</h4>
+    {% if biens is not empty %}
+      <table class="table table-bordered table-striped">
+        {% for bien in biens %}
+        <tr><td>
+          <div class="span2">
+	          <img alt="Photo {{ bien.titrebien }}" src="{{ images() }}/{{ bien.photoBien }}"/>
+          </div>
+          <div class="span4 text-center">
+            <div>
+	            <strong>{{ bien.titrebien }}</strong><br/>
+            <span>{{ bien.prixbien }} €</span>
+            </div>
+            <em>{{ bien.nomtype }}</em>
+          </div>
+          <div class="span6 text-right">
+            <p>
+              Prix de départ : {{ bien.prixdepart }} €<br/>
+              {% if bien.nbcli > 0 %}
+                {{ bien.nbcli }} surenchères<br/>
+                Enchère max : {{ bien.montantmax }} €
+              {% else %}
+              <em>Aucune surenchère</em>
+              {% endif %}
+            </p>
+	          <a class="btn" href="#">Renchérir</a>
+          </div>
+        </td></tr>
+        {% endfor %}
+      </table>
+    {% else %}
+    <p><em>Il n'y a aucun bien mis aux enchères</em></p>
+    {% endif %}
+  </div>
+  <div class="span4">
+    <h4>Surenchères</h4>
+    
+    <a class="btn btn-danger" href="{{ queries('base','raz',{}) }}">RAZ Base !</a>
+  </div>
+</div>
+{% endblock %}

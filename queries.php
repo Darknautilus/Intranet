@@ -15,7 +15,8 @@ $DEFAULT_ACTION = array(
 	"visites" => "saisir",
 	"base" => "afficher",
   "admin" => "home",
-  "stats" => "total_ventes"
+  "stats" => "total_ventes",
+  "enchere" => "home"
 );
 
 $GLOBALS["DEFAULT_ACTION"] = $DEFAULT_ACTION;
@@ -58,6 +59,9 @@ $MODULES = array(
     ),
   "stats" => array(
     "total_ventes"
+    ),
+  "enchere" => array(
+    "home"
     )
 	);
 
