@@ -480,3 +480,79 @@ function getStatsSurenchere(url) {
 		}
 	});
 }
+
+/*
+ * Compte à rebours
+ * Il suffit de donner la classe .kontarebour à un élément, tout en lui donnant le timestamp de fin comme valeur d'attribut "end-timestamp"
+ */
+$(document).ready(function() {
+	var debut = new Date();
+	debut = debut.getTime()/1000;
+	var fin = $(".kontarebour").attr("end-timestamp");
+	kontarebour(debut,fin);
+	
+});
+function kontarebour(debut,fin) {
+	$(".kontarebour").html(diviserTemps(fin-debut));
+}
+function diviserTemps(time) {
+	var hour = Math.floor(time/3600);
+	var minutes = Math.floor(time/60);
+	var seconds = Math.floor(time);
+	var ret = "";
+	if(hour == 1)
+		ret += hour+" heure";
+	else if(hour > 1)
+		ret += hour+" heures";
+	if(hour >= 1) {
+		var minutesR = minutes - hour*60;
+		if(minutesR == 1)
+			ret += ", "+minutesR+" minute";
+		else if(minutesR > 1)
+			ret += ", "+minutesR+" minutes";
+		
+		if(minutesR >= 1) {
+			var secR = seconds - minutes*60 - hour*60;
+			if(secR > 0)
+				ret += " et ";
+			if(secR == 1)
+				ret += secR+" seconde";
+			else if(secR > 1)
+				ret += secR+" secondes";
+		}
+		else {
+			var secR = seconds - hour*3600;
+			if(secR > 0)
+				ret += " et ";
+			if(secR == 1)
+				ret += secR+" seconde";
+			else if(secR > 1)
+				ret += secR+" secondes";
+		}
+	}
+	else {
+		if(minutes == 1)
+			ret += minutes+" minute";
+		else if(minutes > 1)
+			ret += minutes+" minutes";
+		if(minutes >= 1) {
+			var secR = seconds - minutes*60;
+			if(secR > 0)
+				ret += " et ";
+			if(secR == 1)
+				ret += secR+" seconde";
+			else if(secR > 1)
+				ret += secR+" secondes";
+		}
+		else {
+			if(seconds == 1)
+				ret += " et "+seconds+" seconde";
+			else if(seconds > 1)
+				ret += " et "+seconds+" secondes";
+			else
+				ret += "Temps écoulé";
+		}
+	}
+	return ret;
+}
+

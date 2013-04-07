@@ -12,6 +12,7 @@ if(isset($_GET["idbien"]) && $bdd->exists("enchere", "idbien", $_GET["idbien"]))
   
   $enchere = $bdd->select("select debut,fin,prixdepart from enchere where idbien = '".$_GET["idbien"]."';");
   $enchere = $enchere[0];
+  $timestampFin = strtotime($enchere["fin"]);
   
   if(isset($_POST["filled"])) {
     if(!$bdd->exists("client","idclient",$_POST["idclient"])) {
@@ -35,7 +36,7 @@ if(isset($_GET["idbien"]) && $bdd->exists("enchere", "idbien", $_GET["idbien"]))
   }
   
   
-  echo $twig->render("enchere_rencherir.html",array("bien" => $bien,"enchere" => $enchere,"errors" => $errors));
+  echo $twig->render("enchere_rencherir.html",array("bien" => $bien,"enchere" => $enchere,"timestampFin" => $timestampFin,"errors" => $errors));
 }
 else {
   $bdd->close();
