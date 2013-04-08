@@ -11,27 +11,32 @@
       <table class="table table-bordered table-striped">
         {% for bien in biens %}
         <tr><td>
-          <div class="span2">
-	          <img alt="Photo {{ bien.titrebien }}" src="{{ images() }}/{{ bien.photoBien }}"/>
+          <div class="row-fluid">
+	          <div class="span2">
+		          <img alt="Photo {{ bien.titrebien }}" src="{{ images() }}/{{ bien.photoBien }}"/>
+	          </div>
+	          <div class="span4 text-center">
+	            <div>
+		            <strong>{{ bien.titrebien }}</strong><br/>
+	            <span>{{ bien.prixbien }} €</span>
+	            </div>
+	            <em>{{ bien.nomtype }}</em>
+	          </div>
+	          <div class="span6 text-right">
+	            <p>
+	              Prix de départ : {{ bien.prixdepart }} €<br/>
+	              {% if bien.nbcli > 0 %}
+	                {{ bien.nbcli }} surenchères<br/>
+	                Enchère max : {{ bien.montantmax }} €
+	              {% else %}
+	              <em>Aucune surenchère</em>
+	              {% endif %}
+	            </p>
+		          <a class="btn" href="{{ queries('enchere','rencherir',{'idbien':bien.idbien}) }}">Renchérir</a>
+	          </div>
           </div>
-          <div class="span4 text-center">
-            <div>
-	            <strong>{{ bien.titrebien }}</strong><br/>
-            <span>{{ bien.prixbien }} €</span>
-            </div>
-            <em>{{ bien.nomtype }}</em>
-          </div>
-          <div class="span6 text-right">
-            <p>
-              Prix de départ : {{ bien.prixdepart }} €<br/>
-              {% if bien.nbcli > 0 %}
-                {{ bien.nbcli }} surenchères<br/>
-                Enchère max : {{ bien.montantmax }} €
-              {% else %}
-              <em>Aucune surenchère</em>
-              {% endif %}
-            </p>
-	          <a class="btn" href="{{ queries('enchere','rencherir',{'idbien':bien.idbien}) }}">Renchérir</a>
+          <div class="row-fluid">
+            <span class="label label-info kontarebour" end-timestamp="{{ bien.timestampFin }}"></span>
           </div>
         </td></tr>
         {% endfor %}

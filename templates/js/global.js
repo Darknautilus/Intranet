@@ -486,15 +486,17 @@ function getStatsSurenchere(url) {
  * Il suffit de donner la classe .kontarebour à un élément, tout en lui donnant le timestamp de fin comme valeur d'attribut "end-timestamp"
  */
 $(document).ready(function() {
-	var debut = new Date();
-	debut = debut.getTime()/1000;
-	var fin = $(".kontarebour").attr("end-timestamp");
-	kontarebour(debut,fin);
-	
+	$(".kontarebour").each(function() {
+		var debut = new Date();
+		debut = debut.getTime()/1000;
+		var kontarebour = $(this);
+		var fin = kontarebour.attr("end-timestamp");
+		setInterval(function() {
+			kontarebour.html(diviserTemps(fin-debut));
+			debut++;
+		}, 1000);
+	});
 });
-function kontarebour(debut,fin) {
-	$(".kontarebour").html(diviserTemps(fin-debut));
-}
 function diviserTemps(time) {
 	var hour = Math.floor(time/3600);
 	var minutes = Math.floor(time/60);
@@ -546,9 +548,9 @@ function diviserTemps(time) {
 		}
 		else {
 			if(seconds == 1)
-				ret += " et "+seconds+" seconde";
+				ret += seconds+" seconde";
 			else if(seconds > 1)
-				ret += " et "+seconds+" secondes";
+				ret += seconds+" secondes";
 			else
 				ret += "Temps écoulé";
 		}
